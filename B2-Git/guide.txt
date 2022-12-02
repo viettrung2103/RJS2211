@@ -1,0 +1,3 @@
+- Tạo tài khoản github
+- Tạo repositories
+- Add 

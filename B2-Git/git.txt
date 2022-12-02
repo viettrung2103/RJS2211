@@ -1,1 +1,3 @@
 tao git
+
+git push --set-upstream origin tenBranch // dung len nay khi muon up branch moi len github
