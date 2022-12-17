@@ -1,0 +1,23 @@
+:root {
+  color: red;
+}
+.flex-container {
+  display: flex;
+  flex-direction: column;
+}
+.flex-container1 {
+  width: 200px;
+  margin: 10px;
+  border: 3px solid #333;
+  background-color: #dfdfdf;
+}
+
+.flex-container-header {
+  min-height: 100px;
+}
+.flex-container-body {
+  min-height: 600px;
+}
+.flex-container-footer {
+  min-height: 100px;
+}
