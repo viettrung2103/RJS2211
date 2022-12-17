@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik+Vinyl&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet"> 
+    
+    <!-- link cdn -->
+
+    <title>Learn CSS</title>
+    <style>
+      /* universal selector */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        font-size: 13px;
+      }
+
+      @font-face {
+        font-family: TungFont;
+        src: url('./font/Oswald-VariableFont_wght.ttf');
+      }
+      /* html selector */
+      h1 {
+        color: red;
+        font-family: 'Rubik Vinyl', cursive;
+      }
+      /* class selector */
+      .blue-color {
+        color: blue;
+      }
+      /* id selector */
+      #name {
+        background-color: aqua;
+        margin-left: 30px;
+      }
+
+      /* Selector phan cap */
+      .parent {
+        width: 100px;
+        height: 100px;
+        background-color: bisque;
+      }
+      /* phan cap cha con */
+      .parent > h3 {
+        color: red;
+      }
+      /* phan cap trong ngoai */
+      .parent h3 {
+        color: red;
+      }
+      /* liet ke, gom nhom  */
+      p,
+      span {
+        color: burlywood;
+      }
+
+      li:nth-child(2) {
+        background: lightgreen;
+      }
+      .half-width {
+        width: 900px;
+        background-color: #f1480c;
+        height: 100px;
+      }
+      #test-rem1 {
+        height: 100px;
+        width: 20rem;
+        background-color: rgb(255, 0, 0);
+      }
+      #test-em {
+        height: 100px;
+        width: 20em;
+        font-size: 2px;
+        background-color: red;
+      }
+      .offline-font {
+        font-family: 'TungFont';
+      }
+      #first-list {
+        font-family: 'Roboto Mono', monospace;
+      }
+      /* .parent2 {
+        font-size: 2px;
+      } */
+      .border {
+        width: 100px;
+height: 200px;
+border: 2px ridge aqua;
+border-top: 10px solid red;
+      }
+      .
+    </style>
+  </head>
+  <>
+    Hello
+    <h1 id="title" class="blue-color">This is H1</h1>
+    <h3 id="name">This is H3</h3>
+    <p class="blue-color">this is p1</p>
+    <span class="blue-color">this is span</span>
+    <div class="offline-font">Div ben ngoai</div>
+    <div class="parent">
+      <h3>child1</h3>
+      <div>
+        <h3>chau</h3>
+      </div>
+    </div>
+    <ul>
+      <li id="first-list">First list item</li>
+      <li>Second list item</li>
+      <li class="test">Third list item</li>
+      <li class="test">Fourth list item</li>
+      <li class="test">Fifth list item</li>
+    </ul>
+    <!-- Don vi do luong -->
+    <!-- tuyet doi: px  -->
+
+    <!-- tuong doi: %, em, rem -->
+    <div class="half-width">lorem500</div>
+    <div class="parent2">
+      <div id="test-rem1">test-rem1</div>
+      <div id="test-em">test-em2</div>
+    </div>
+    <div class="border">
+    </div>
+    <div id="box1">
+      <div id="content-box1">
+      </div>
+    </div>
+    <div id="box1">
+      <div id="content-box2">
+      </div>
+    </div>
+  </body>
+</html>
