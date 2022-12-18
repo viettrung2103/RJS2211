@@ -1,7 +1,7 @@
 :root {
   color: red;
 }
-.flex-container {
+.flexbox-container {
   display: flex;
   flex-direction: column;
 }
@@ -22,6 +22,8 @@
   background-size: 1775.77px 930px;
   display: flex;
   flex-direction: row;
+  margin-bottom: 115px;
+  justify-content: space-around;
 }
 /* tao anh bg */
 /* #header-bg {
@@ -32,15 +34,31 @@
 .header-navbar {
   font-family: "Roboto", sans-serif;
   font-size: 15px;
-  width: 100%;
+  line-height: 28px;
+  color: white;
 }
 .navbar-lists {
+  /* padding-left: 100px; */
+  /* padding-top: 67px; */
+  list-style-type: none;
+  direction: flex;
+  flex-direction: row;
+  font-weight: 400;
+  gap: 10px;
+}
+
+.navbar-item {
+  padding: 10px;
+}
+#logo-figma {
+  width: 186px;
+  height: 58px;
+}
+.navbar-social-logo {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-}
-.navbar-item {
-  justify-content: center;
+  gap: 33px;
+  list-style-type: none;
 }
 /* #triangle1 {
   padding-top: 660px;
@@ -62,7 +80,9 @@
 
 .flex-container-body {
   min-height: 600px;
+  align-self: flex-end;
 }
 .flex-container-footer {
   min-height: 100px;
+  align-self: flex-start;
 }
