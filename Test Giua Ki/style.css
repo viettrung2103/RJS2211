@@ -1,5 +1,8 @@
+* {
+  font-family: "Roboto", sans-serif;
+}
 :root {
-  color: red;
+  color: black;
 }
 .flexbox-container {
   display: flex;
@@ -17,7 +20,7 @@
 .flex-container-header {
   width: 1775px;
   height: 930px;
-  background-image: url("./media/image/80b7ece24a3d47292461f8e199ffdd36.jpeg");
+  background-image: url("./media/image/background-header.png");
   background-repeat: no-repeat;
   background-size: 1775.77px 930px;
   display: flex;
@@ -40,11 +43,12 @@
 .navbar-lists {
   /* padding-left: 100px; */
   /* padding-top: 67px; */
+  padding-left: 100px;
   list-style-type: none;
-  direction: flex;
-  flex-direction: row;
   font-weight: 400;
-  gap: 10px;
+  gap: 30px;
+  display: flex;
+  flex-direction: row;
 }
 
 .navbar-item {
@@ -57,8 +61,45 @@
 .navbar-social-logo {
   display: flex;
   flex-direction: row;
-  gap: 33px;
+  gap: 24px;
   list-style-type: none;
+}
+
+.logo-item {
+  width: 41px;
+  height: 41px;
+}
+
+#feature-section {
+  width: 1777px;
+  height: 1361px;
+}
+.feature {
+  display: block;
+  text-align: center;
+  font-size: 48px;
+  font-weight: 400;
+}
+
+.feature-desc {
+  text-align: center;
+  display: block;
+  padding-top: 7px;
+  font-weight: 400;
+  font-size: 28px;
+}
+.container-feature-items {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 456px;
+  padding-right: 456px;
+  gap: 52px;
+}
+
+#feature1 {
+  width: 255px;
+  height: 257px;
 }
 /* #triangle1 {
   padding-top: 660px;
