@@ -79,14 +79,17 @@
   text-align: center;
   font-size: 48px;
   font-weight: 400;
+  margin-bottom: 17px;
+  margin-top: 0px;
 }
 
 .feature-desc {
   text-align: center;
-  display: block;
-  padding-top: 7px;
+  margin-top: 7px;
   font-weight: 400;
   font-size: 28px;
+  font-style: normal;
+  margin-bottom: 90px;
 }
 .container-feature-items {
   display: flex;
@@ -96,10 +99,53 @@
   padding-right: 456px;
   gap: 52px;
 }
+div h4 {
+  margin: 10px;
+}
 
 #feature1 {
   width: 255px;
   height: 257px;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.text-center {
+  text-align: center;
+}
+
+.feature-logo {
+  width: 61px;
+  height: 61px;
+}
+.feature-title {
+  margin: top 10px bottom 5px;
+  font-size: 20px;
+  font-weight: 700;
+}
+h3 p {
+  margin: 5px;
+}
+.feature-detail {
+  /* margin-top: 10px; */
+  width: 251px;
+  height: 100px;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.screen-section {
+  width: 1177px;
+  height: 762px;
+}
+.screen {
+  width: 1177px;
+  height: 658px;
+  padding: 52px 0 52px 0;
 }
 /* #triangle1 {
   padding-top: 660px;
