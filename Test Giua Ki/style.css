@@ -201,8 +201,46 @@ h3 p {
   letter-spacing: 0.2px;
   margin: 10px 0px 10px 0px;
 }
+.font-h3 {
+  font-size: 20px;
+  font-weight: 700px;
+  line-height: 28px;
+  letter-spacing: 0.1px;
+}
 
-
+/* Section-3 */
+.body-section-3 {
+  width: 1440px;
+  height: 725px;
+  margin: 0 168px 0 0;
+}
+#screen-content-logo {
+  width: 854px;
+  height: 532px;
+}
+.section-3-image {
+  margin-right: 50px;
+  margin-top: 106px;
+  margin-left: 50px;
+}
+.section-3-desc {
+  width: 544px;
+  height: 500px;
+  padding: 0 0 0 63px;
+  margin: 69px 50px 69px 0;
+}
+#section-3-desc-h3 {
+  margin-top: 106px;
+  padding: 15px 0 0 0;
+}
+#section-3-desc-subscribe {
+  width: 477px;
+  height: 199px;
+}
+#subscribe-section {
+  width: 477px;
+  height: 199px;
+}
 /* #triangle1 {
   padding-top: 660px;
   width: 0;
