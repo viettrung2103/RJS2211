@@ -70,7 +70,7 @@
   height: 41px;
 }
 
-#feature-section {
+#body-section {
   width: 1777px;
   height: 1361px;
 }
@@ -108,10 +108,20 @@ div h4 {
   height: 257px;
 }
 
-.center {
+.center-column {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.center-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.left-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .text-center {
   text-align: center;
@@ -147,6 +157,52 @@ h3 p {
   height: 658px;
   padding: 52px 0 52px 0;
 }
+/* part for section-2 */
+.body-section-2 {
+  width: 1777px;
+  height: 924px;
+  padding: 226px 82px 226px 82px;
+}
+.section-2-desc {
+  width: 532px;
+  height: 357px;
+}
+#try-logo {
+  width: 236px;
+  height: 60px;
+}
+#mac-image {
+  width: 661px;
+  height: 386px;
+}
+.section-2-desc {
+  margin-right: 50px;
+  margin-left: 226px;
+}
+.section-2-image {
+  margin-right: 226px;
+}
+#section-2-desc-button {
+  margin-top: 60px;
+}
+#section-2-desc-h2 {
+  margin-bottom: 20px;
+}
+.font-h2 {
+  font-size: 48px;
+  font-weight: 400px;
+  line-height: 55px;
+  letter-spacing: 0.2px;
+}
+.font-h4 {
+  font-size: 28px;
+  font-weight: 400px;
+  line-height: 40px;
+  letter-spacing: 0.2px;
+  margin: 10px 0px 10px 0px;
+}
+
+
 /* #triangle1 {
   padding-top: 660px;
   width: 0;
