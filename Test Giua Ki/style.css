@@ -280,8 +280,9 @@ h3 p {
 /* Section 5 */
 #body-section-5 {
   width: 1439px;
-  min-height: 811px;
+  height: 811px;
   margin: 0 169px 0 169px;
+  padding: 100px 0 100px 0;
 }
 #section-5-text {
   margin-top: 100px;
@@ -310,7 +311,41 @@ h3 p {
 #big-button {
   width: 276px;
   height: 60px;
-  margin-bottom: 100px;
+}
+
+/* Section 6 */
+#body-section-6 {
+  background-color: #252b42;
+  color: white;
+  width: 1777px;
+  height: 1155px;
+  padding: 100px 0 100px 0;
+}
+
+#section-6-texts {
+  width: 552px;
+  height: 182px;
+  margin-bottom: 80px;
+}
+#section-6-h2 {
+  padding: 10px;
+  margin: 0 0 7px 0;
+}
+
+#section-6-items {
+  width: 1105px;
+  height: 693px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.border-size-1 {
+  width: 335px;
+  height: 607px;
+}
+.border-size-2 {
+  width: 335px;
+  height: 693px;
 }
 
 .flex-container-body {
