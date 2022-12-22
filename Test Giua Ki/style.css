@@ -4,11 +4,33 @@
 :root {
   color: black;
 }
+
+/* Font Style */
+.font-h2 {
+  font-size: 48px;
+  font-weight: 400px;
+  line-height: 55px;
+  letter-spacing: 0.2px;
+}
+.font-h4 {
+  font-size: 28px;
+  font-weight: 400px;
+  line-height: 40px;
+  letter-spacing: 0.2px;
+  margin: 10px 0px 10px 0px;
+}
+.font-h3 {
+  font-size: 20px;
+  font-weight: 700px;
+  line-height: 28px;
+  letter-spacing: 0.1px;
+}
 .flexbox-container {
   display: flex;
   flex-direction: column;
 }
 
+/* Body */
 .flex-container1 {
   width: 100%;
   margin: 10px;
@@ -155,7 +177,7 @@ h3 p {
 .screen {
   width: 1177px;
   height: 658px;
-  padding: 52px 0 52px 0;
+  padding: 0 0 52px 0;
 }
 /* part for section-2 */
 .body-section-2 {
@@ -187,25 +209,6 @@ h3 p {
 }
 #section-2-desc-h2 {
   margin-bottom: 20px;
-}
-.font-h2 {
-  font-size: 48px;
-  font-weight: 400px;
-  line-height: 55px;
-  letter-spacing: 0.2px;
-}
-.font-h4 {
-  font-size: 28px;
-  font-weight: 400px;
-  line-height: 40px;
-  letter-spacing: 0.2px;
-  margin: 10px 0px 10px 0px;
-}
-.font-h3 {
-  font-size: 20px;
-  font-weight: 700px;
-  line-height: 28px;
-  letter-spacing: 0.1px;
 }
 
 /* Section-3 */
@@ -241,23 +244,40 @@ h3 p {
   width: 477px;
   height: 199px;
 }
-/* #triangle1 {
-  padding-top: 660px;
-  width: 0;
-  height: 0;
-  border-left: 0px solid transparent;
-  border-right: 1300px solid transparent;
-  border-bottom: 245px solid white;
-} */
-/* #triangle2 {
-  justify-content: center;
-  padding-top: 660px;
-  width: 0;
-  height: 0;
-  border-left: 0px solid transparent;
-  border-right: 1300px solid transparent;
-  border-bottom: 245px solid white;
-} */
+
+/* Section 4 */
+#body-section-4 {
+  width: 1440px;
+  min-height: 932px;
+  margin: 0 168.5px 0 168.5px;
+}
+#section-4-texts {
+  width: 552px;
+  height: 222px;
+  margin: 80px 444px 80px 444px;
+}
+#section-4-h2 {
+  margin: 33px 0 7px 0;
+}
+#section-4-h4 {
+  margin-bottom: 0px;
+}
+#section-4-images {
+  margin: 0 182.5px 80px 182.5px;
+}
+#companies-logos {
+  width: 1075px;
+  height: 330px;
+}
+#section-4-button {
+  margin: 0 602px 80px 602px;
+}
+#try-button {
+  width: 236px;
+  height: 60px;
+}
+
+/* Section 5 */
 
 .flex-container-body {
   min-height: 600px;
