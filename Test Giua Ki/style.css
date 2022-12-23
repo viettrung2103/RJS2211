@@ -30,6 +30,25 @@
   align-items: center;
 }
 
+.center-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.left-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.text-center {
+  text-align: center;
+}
+.middle-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 /* Font Style */
 .font-h2 {
   font-size: 48px;
@@ -112,6 +131,7 @@
 #logo-figma {
   width: 186px;
   height: 58px;
+  margin-left: 25px;
 }
 .navbar-social-logo {
   display: flex;
@@ -161,20 +181,6 @@ div h4 {
 #feature1 {
   width: 255px;
   height: 257px;
-}
-
-.center-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-.left-column {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.text-center {
-  text-align: center;
 }
 
 .feature-logo {
@@ -400,7 +406,15 @@ h3 p {
   width: 453px;
   height: 669px;
 }
-
+#column-2 {
+  width: 725px;
+  height: 612.17px;
+  margin: 28px 0 28px 50px;
+}
+#column-2-image {
+  width: 725px;
+  height: 612px;
+}
 /* section footer */
 #section-footer {
   min-width: 1777px;
