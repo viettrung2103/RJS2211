@@ -30,7 +30,12 @@
   align-items: center;
 }
 
-.center-row {
+.row-center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.space-around-row {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -82,6 +87,7 @@
   font-weight: 700px;
   line-height: 84px;
   letter-spacing: 0.2px;
+  margin: 0;
 }
 .font-h2 {
   font-size: 48px;
@@ -94,6 +100,8 @@
   font-weight: 700px;
   line-height: 28px;
   letter-spacing: 0.1px;
+  padding: 3px 0;
+  margin: 0;
 }
 .font-h4 {
   font-size: 28px;
@@ -107,12 +115,15 @@
   font-weight: 400px;
   line-height: 23px;
   letter-spacing: 0.1px;
+  margin: 0;
 }
 .font-text {
   font-size: 15px;
   font-weight: 400px;
   line-height: 28px;
   letter-spacing: 0.2px;
+  margin: 0;
+  padding: 10px;
 }
 
 /* logos */
@@ -445,19 +456,68 @@ h3 p {
 }
 
 #section-6-items {
-  width: 1105px;
+  width: 1036px;
   height: 693px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
-.border-size-1 {
+.box-white {
+  color: black;
+  box-sizing: border-box;
   width: 335px;
   height: 607px;
+  background-color: #ffffff;
+  border: solid 1px #dedede;
+  border-radius: 10px;
+  padding: 40px;
+  box-shadow: 0 13px 19px rgba(0, 0, 0, 0.07);
+  gap: 30px;
 }
-.border-size-2 {
-  width: 335px;
+.box-blue {
+  width: 266px;
   height: 693px;
+  box-sizing: border-box;
+  color: #ffffff;
+  background-color: #2091f9;
+  border: 1px #dedede solid;
+  box-shadow: 0px 13px 19px rgba(0, 0, 0, 0.07);
+  border-radius: 10px;
+  padding: 83px 40px 83px 40px;
+  margin: 0 50px;
+  gap: 30px;
+}
+.box-head {
+  width: 148px;
+  min-height: 80px;
+}
+.box-row {
+  width: 153px;
+  min-height: 61px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  order: 0;
+}
+.box-row-block {
+  box-sizing: content-box;
+  min-width: 78px;
+  height: 51px;
+  order: 1;
+  align-self: center;
+}
+.box-row-block {
+  display: flex;
+  flex-direction: column;
+}
+.box-list {
+  width: 255px;
+  min-height: 240px;
+}
+.order-button-blue {
+  width: 255px;
+  height: 56px;
+}
+.order-button-white {
+  width: 186px;
+  height: 56px;
 }
 
 /* Section 7 */
