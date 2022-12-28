@@ -1,0 +1,9 @@
+GIT- teamwork
+- tạo branch khi muốn dev new feature or fix bug
+- chỉ team lead mới có thể push code or main branch, còn lại chỉ có thể pull repo và tạo push request
+cach tao ten branch:
+- feature/name/nameFeature: tạo feature
+- fixbug/name/nameBug: fix bug
+- hotfix/name/nameBug: sửa lỗi khẩn cấp by Name
+note: khi chuyển nhánh giữa branch với main
+-chú ý là ko có sự thay đổi ở nhánh branch hoặc toàn bộ thay đổi bên branch đã dc commit
