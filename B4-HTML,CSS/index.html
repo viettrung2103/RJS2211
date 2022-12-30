@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  Table
+<table>
+  <tr id="row1">
+    <th>Number</th>
+    <th>Name</th>
+    <th>Phone</th>
+    <th>Addres</th>
+  </tr>
+  <tr id="row2">
+    <td>1</td>
+    <td >Trung</td>
+    <td>123456</td>
+    <td>Lahti</td>
+  </tr>
+  <tr id="row3">
+    <td>2</td>
+    <td rowspan="2">Trung2</td>
+    <td colspan="2">123456123</td>
+    <!-- <td>Helsinki</td> -->
+  <tr id="row4">
+    <td>3</td>
+    <!-- <td>Trung3</td> -->
+    <td>123456123123</td>
+    <td>Turku</td>
+  </tr>
+      <!-- khi lam colspan/ merge, merge 2 column, phai xoa du
+    lieu o column muoo merge (vd, merge col 1 va 
+    col 2, xoa data o col 2) -->
+    <!-- khi lam rowspan/ merge 2 row, phai xoa du lieu o row muon merge 
+    vd: merge row 3 va row 4, xoa data o row 4 -->
+</table>  
+</body>
+</html>
