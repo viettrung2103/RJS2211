@@ -54,20 +54,6 @@ const timMinMaxMedium = (arr) => {
   //   }
 };
 // tạo bảng số nguyên tố
-const taoBangSoNguyenTo = (arr) => {
-  if (arr.length === 0) {
-    console.log(`mang rong`);
-  } else {
-    arr.sort();
-    let newArr = [];
-    for (let index = 0; index <= arr.length - 1; index++) {
-      if (isPrimeNum(arr[index])) {
-        newArr.push(arr[index]);
-      }
-    }
-    return newArr;
-  }
-};
 
 // 23. Cho một mảng là một tập các số nguyên, tìm số có tần suất xuất hiện nhiều nhất và
 // số đó xuất hiện bao nhiêu lần?
@@ -95,17 +81,58 @@ const soXuatHienNhat = (arr) => {
 // 24. Cho một mảng là một tập các số nguyên dương, lọc ra một bảng b gồm tất cả các số
 // là số nguyên tố? (Dùng filter)
 // VD: a = [1,2,3,2,3,4,6,7] .Output: b=[2,3,2,3,7]
+// C1
+const taoBangSoNguyenTo = (arr) => {
+  if (arr.length === 0) {
+    console.log(`mang rong`);
+  } else {
+    arr.sort();
+    let newArr = [];
+    for (let index = 0; index <= arr.length - 1; index++) {
+      if (isPrimeNum(arr[index])) {
+        newArr.push(arr[index]);
+      }
+    }
+    return newArr;
+  }
+};
+// C2
+const taoBangSoNguyenTo2 = (arr) => {
+  if (arr.length === 0) {
+    console.log(`mang rongo`);
+  } else {
+    arr.sort();
+    const bangSoNguyenTo = arr.filter(isPrimeNum); // chu y khong call callback function trong filer
+    return bangSoNguyenTo;
+  }
+};
 
 // 25. Cho một mảng là một tập các số nguyên dương, hãy tạo một mảng b là tập hợp bình
 // phương của các số trong mảng a
 // VD: a = [1,2,3,2,3,4,6,7] .Output: b=[1,4,9,4,9,16,36,49]
+// C1:
+const makeSquareNumber = (a) => {
+  return a * a;
+};
+const makeSquareArray1 = (arr) => {
+  let squareArray = [];
+  for (let index = 0; index <= arr.length - 1; index++) {
+    squareNum = makeSquareNumber(arr[index]); // tạo square number
+    squareArray.push(squareNum); //them so dc binh phuong vo array
+  }
+  return squareArray; // return array so binh phuong
+};
 
-//  !! 23. Cho một mảng là một tập các số nguyên, tìm số có tần suất xuất hiện nhiều nhất và
-// số đó xuất hiện bao nhiêu lần?
-// VD: a = [1,2,3,4,5,6,7,8,9,9,9,8,7,6,5,4,3,2,1] .Output: 9
+//C2:
+const makeSquareArray2 = (arr) => {
+  const squareArray = arr.map((x) => x * x);
+  return squareArray;
+};
+
+const ARR1 = (a = [1, 2, 3, 2, 3, 4, 6, 7]);
 const ARR = [
   11, 2, 234, 1, 45654, 131, 2, 3, 4, 5, 2, 6, 11, 2, 524, 11, 11, 3, 1235, 76,
   2, 11, 11,
 ];
 
-console.log(soXuatHienNhat(ARR));
+console.log(taoBangSoNguyenTo2(ARR));
