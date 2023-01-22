@@ -1,6 +1,11 @@
-table,
-tr,
-th,
-td {
-  border: solid black 1px;
+/* h1 {
+  cursor: pointer;
+} */
+
+.cursor {
+  cursor: pointer;
+}
+
+.alias {
+  cursor: alias;
 }

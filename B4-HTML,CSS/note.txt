@@ -1,0 +1,15 @@
+checkbox: check duoc nhieu lua chon cung 1 luc
+radio: chi chon dc 1 gia tri 
+
+thong tin trong input, type, id, name, value deu la attribute cua input
+input: (key/value)
+ + name(key): name của dữ liệu sẽ lưu vô biến name
+ + value(value):data sẽ lưu vào biến value
+
+ ++ để click 1 option mà những option khác biến mất thì tất cả option đều phải có chung name( vd name = 'fav_language) 
+ 
+ co 2 method chinh trong form
+ ++get: đẩy dữ liệu thông qua thanh url ->> dữ liệu sau khi submit sẽ hiện trên thanh url
+ vd: search query
+ ++post: đẩy dữ liệu thông qua payload của request
+ +++ action: trong form, dung trong post method, để chỉ nơi sẽ đẩy dữ liệu tới, url

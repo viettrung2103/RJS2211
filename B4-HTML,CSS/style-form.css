@@ -1,0 +1,21 @@
+.form {
+  min-width: 500px;
+  min-height: 1000px;
+  border: solid black 1px;
+  padding: 10px;
+}
+#email,
+#password {
+  display: block;
+  width: 100%;
+}
+.box {
+  box-sizing: border-box;
+  min-width: 200px;
+  min-width: 300px;
+  pad: 5px;
+  margin: 5px;
+  /* display: flex;
+  flex-direction: row;
+  justify-content: space-between; */
+}

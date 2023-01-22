@@ -1,10 +1,13 @@
 // B0: la so nguyen to
 const isPrimeNum = (n) => {
-  let flag = true;
+  let flag = true; // la so nguyen to
   if (n < 2) {
     flag = false;
   } else if (n === 2) {
-    return "2 la so nguyen to";
+    flag = true;
+  } else if (n % 2 === 0) {
+    // kiem tra xem n co phai la so chan khac 2 k
+    flag = false;
   } else {
     for (let index = 3; index < n; index += 2) {
       if (n % index === 0) {
@@ -13,7 +16,6 @@ const isPrimeNum = (n) => {
       }
     }
   }
-
   if (flag === true) {
     return `${n} la so nguyen to`;
   } else {
@@ -60,7 +62,7 @@ const inSoNguyenTo = (n) => {
     if (index === 1) {
       continue;
     }
-    if (index === 3) {
+    if (index === 2) {
       console.log("2");
       console.log(`${index}`);
     }
@@ -200,4 +202,4 @@ const inCuuChuong = () => {
   }
 };
 
-console.log(soDaoNguoc(10));
+console.log(isPrimeNum(7));
