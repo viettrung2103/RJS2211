@@ -1,2 +1,11 @@
 Doc file trong agenda
 html + css practice: youtube
+
+yarn add
+
+npm install
+
+khi clone 1 project ve
+cai package hoac node_modules : npm install hoac yarn install
+
+dung yarn thi tao ra yarn.lock
