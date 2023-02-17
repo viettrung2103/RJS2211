@@ -1,0 +1,6 @@
+1. tao function de them, doc, sua, xoa file.
+1.1 tao function
+1.2 tuong tac function voi terminal
+2. tao object sinh vien
+3. tao function để quản lý sinh viên
+3.1 array sinh vien
