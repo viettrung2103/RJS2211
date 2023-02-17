@@ -197,6 +197,53 @@ const phepTinhNCPromise = (a, b, c, d, e, f, h) => {
       console.log(error);
     });
 };
+const phepTinhNCPromise1 = (a, b, c, d, e, f, h) => {
+  Promise.all([congPromise(a, b), chiaPromise(c, d), truPromise(e, f)])
+    // .then((kqArr) => {
+    //   return kqArr; // [(a+b), (c/d),(e-f)]
+    // })
+    .then((kqArr) => {
+      return nhanPromise(kqArr[0], h)
+        .then((result) => {
+          return nhanPromise(result, kqArr[1]);
+        })
+        .then((result) => {
+          return congPromise(result, kqArr[2]);
+        })
+        .then((result) => {
+          return chiaPromise(result, 2);
+        })
+        .then((result) => console.log(`ket qua cuoi cung ${result}`));
+    })
+    // let kqNhanNCPro2 = nhanPromise(kqArr[0], h);
+    // kqNhanNCPro2
+    //   .then((kqNhanPro2) => {
+    //     kqArr.push(kqNhanPro2);
+    //     return kqArr; //[(a+b), (c/d),(e-f), (a+b)*h]
+    //   })
+    //   .then((kqArr) => {
+    //     let kqNhanNCPro3 = nhanPromise(kqArr[3], kqArr[1]);
+    //     kqNhanNCPro3
+    //       .then((kqNhanPro3) => {
+    //         kqArr.push(kqNhanPro3);
+    //         return kqArr; // [(a+b), (c/d),(e-f), (a+b)*h,(a+b) * h * (c/d)]
+    //       })
+    //       .then((kqArr) => {
+    //         let kqCongNCPro2 = congPromise(kqArr[4], kqArr[2]);
+    //         kqCongNCPro2
+    //           .then((kqCongPro2) => {
+    //             kqArr.push(kqCongPro2);
+    //             return kqArr; // [(a+b), (c/d),(e-f), (a+b)*h,(a+b) * h * (c/d), (a+b) * h * (c/d) +(e-f)]
+    //           })
+    //           .then((kqAr) => {
+    //             let kqChiaNCPro2 = chiaPromise(kqAr[5], 2);
+    //             kqChiaNCPro2.then((result) =>
+    //               console.log(`ket qua cuoi cung: ${result}`)
+
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 // congPromise(a, b)
 //   .then((kqCongPro1) => {
@@ -214,27 +261,17 @@ const phepTinhNCPromise = (a, b, c, d, e, f, h) => {
 //   .catch((error) => {
 //     console.log(error);
 //   });
-phepTinhNCPromise(3, 5, 6, 4, 5, 3, 2, 5);
+// phepTinhNCPromise(3, 5, 6, 4, 5, 3, 2, 5);
+phepTinhNCPromise1(3, 5, 6, 4, 5, 3, 2, 5);
 // ((a + b -c) * d)/e
-// phepTinhPromise(3, 5, 6, 4, 5);
-// const phepTinhPromise (a,b,c) => {
-//   phep
-// }
-// new Promise((resove, reject) => {
-//   console.log(`Start cong`);
-//   setTimeout(() => {
-//     const sum = a + b;
-//     console.log(` Phep Cong: ${a} + ${b} = ${sum} `);
-//   }, 1000);
-//   if (sum) {
-//     resove;
-//   } else {
-//     reject();
-//   }
-// });
 
 // phepTinh(5, 6, 3, 4, 2, 5, 10);
 // callback hell: rat kho maintain
 // sinh ra 2 cái để xử lý bất đồng bộ: Promise, Async await
 
 // xu ly bai tap tren theo dang promise
+
+
+
+// all
+// all xu ly error: khi xu ly cac promise, promise dau tien co error thi se chuyen error ay vo catch cua all, con nhung error khac ko nhan
