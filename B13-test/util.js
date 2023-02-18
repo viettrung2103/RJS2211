@@ -1,4 +1,4 @@
-const svArr = [];
+let svArr = [];
 // const INDEX = 0;
 
 class SinhVien {
@@ -23,7 +23,6 @@ const createSV = (name, age, sex) => {
     //   }
     //   return max;
     // }
-
     index = svArr[svArr.length - 1].id + 1; // lay id  trong index cuoi cung + 1
     const newSV = new SinhVien(index, name, age, sex);
     console.log(
@@ -40,36 +39,126 @@ const createSV = (name, age, sex) => {
   }
 };
 
-const timSV = (id) => {
+// neu ton tai, return index cua id
+// neu khong ton tai, return false
+const timSVById = (id) => {
   let foundId = true;
   for (let index = 0; index <= svArr.length - 1; index++) {
     if (svArr[index].id === id) {
       console.log(`sinh vien voi id ${id} ton tai`);
-      return foundId;
+      return index;
     } else {
-      console.log(`sinh vien voi id ${id} khong ton tai`);
       foundId = false;
-      return foundId;
     }
+  }
+  console.log(`sinh vien voi id ${id} khong ton tai`);
+  return foundId;
+};
+// xoa sinh voi id # va tra ve mang sinh vien khong co sinh vien voi id#
+const xoaSV = (id) => {
+  timSVById(id);
+  if (timSVById(id) === "false") {
+    console.log(`sinh vien voi id ${id} khong ton tai`);
+  } else {
+    let arrMoi = [];
+    for (let index = 0; index <= svArr.length - 1; index++) {
+      if (svArr[index].id !== id) {
+        arrMoi.push(svArr[index]);
+      } else {
+        continue;
+      }
+    }
+    console.log(`sinh vien voi id: ${id} da duoc xoa`);
+    svArr = arrMoi;
+    return svArr;
+  }
+  // return svArr;
+};
+
+const editSV = (id, name, age, sex) => {
+  timSVById(id);
+  if (timSVById(id) === "false") {
+    console.log(`khong ton tai sinh vien voi id: ${id}`);
+  } else {
+    svArr[timSVById(id)].name = name;
+    svArr[timSVById(id)].age = age;
+    svArr[timSVById(id)].sex = sex;
+    console.log(`update; ${id}, name:${name},age:${age},sex: ${sex}`);
+    return svArr[timSVById(id)];
   }
 };
 
-// const xoaSV = (id) => {
-//   svArr.filter(id =>)
+const timSVByName = (name) => {
+  const filteredName = svArr.filter((x) => x.name === "Trinh");
+  return filteredName;
+};
 
-// }
+const sortByName = () => {
+  const sortedByName = svArr.sort(function (current, next) {
+    return current.name.localeCompare(next.name, "vi", { sensitivity: "base" });
+  });
+  return sortedByName;
+};
+
+const sortById = () => {
+  const sortedById = svArr.sort((current, next) => {
+    if (current.id < next.id) return -1;
+    if (current.id > next.id) return 1;
+    return 0;
+  });
+  return sortedById;
+};
+// sap xep theo tuoi tang dan
+const sortByAge = () => {
+  const sortedByAge = svArr.sort((current, next) => {
+    if (current.age < next.age) return -1;
+    if (current.age > next.age) return 1;
+    return 0;
+  });
+  return sortedByAge;
+};
+// sap xep theo tuoi giam dan
+const invertbyAge = () => {
+  const sortedByAge = svArr.sort((current, next) => {
+    if (current.age > next.age) return -1; // -1 la so lon de sau so be
+    if (current.age < next.age) return 1; // 1 nghia la so lon de truoc so be
+    return 0;
+  });
+  return sortedByAge;
+};
 
 console.log(svArr);
 console.log(createSV("Trung", 18, "nam"));
 console.log(svArr);
 console.log(createSV("Nam", 20, "nam"));
 console.log(createSV("Ha", 20, "nu"));
+console.log(createSV("Nam1", 25, "nu"));
+console.log(createSV("Ha3", 24, "nu"));
 console.log(svArr);
-// console.log(createSV("Trinh", 25, "nu"));
-// console.log(svArr);
-// console.log(timSV(1));
-// const max = svArr.reduce(function (prev, current) {
-//   return prev.id > current.id ? prev.id : current.id;
+console.log(createSV("Trinh", 25, "nu"));
+console.log(svArr);
+console.log(`tim sv voi id 5: ${timSVById(5)}`);
+let newArray = xoaSV(5);
+console.log(newArray);
+console.log(svArr[0]);
+console.log(timSVById(1));
+// console.log(editSV(1, "trung111", 2000, "nu"));
+console.log(timSVByName("Trinh"));
+// console.log(sortbyname(svArr));
+// const sortedbyName = svArr.sort(function (a, b) {
+//   return a.name.localeCompare(b.name, "vi", { sensitivity: "base" });
 // });
-// console.log(max);
-// console.log(svArr[svArr.length - 1].id);
+// const sortedbyId = svArr.sort((a, b) => {
+//   if (a.id < b.id) return -1;
+//   if (a.id > b.id) return 1;
+//   return 0;
+// });
+// console.log(sortedbyName);
+// console.log(sortByName());
+// console.log(sortById());
+// console.log(sortedbyId);
+// editSV(2, "Nam22", 30, "nu");
+// console.log(sortByAge());
+// console.log(invertbyAge());
+// console.log(svArr[0]);
+// console.log(svArr);
