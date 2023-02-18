@@ -155,55 +155,16 @@ const phepTinhPromise = (a, b, c, d, e) => {
       console.log(error);
     });
 };
-// phepTinhNCPromise(3, 5, 6, 4, 5, 3, 2);
 
 // (a + b) * h * (c/ d) + (e- f) /2
 const phepTinhNCPromise = (a, b, c, d, e, f, h) => {
-  Promise.all([congPromise(a, b), chiaPromise(c, d), truPromise(e, f)])
+  Promise.all([congPromise(a, b), chiaPromise(c, d), truPromise(e, f)]) // tao array
     // .then((kqArr) => {
     //   return kqArr; // [(a+b), (c/d),(e-f)]
     // })
     .then((kqArr) => {
-      let kqNhanNCPro2 = nhanPromise(kqArr[0], h);
-      kqNhanNCPro2
-        .then((kqNhanPro2) => {
-          kqArr.push(kqNhanPro2);
-          return kqArr; //[(a+b), (c/d),(e-f), (a+b)*h]
-        })
-        .then((kqArr) => {
-          let kqNhanNCPro3 = nhanPromise(kqArr[3], kqArr[1]);
-          kqNhanNCPro3
-            .then((kqNhanPro3) => {
-              kqArr.push(kqNhanPro3);
-              return kqArr; // [(a+b), (c/d),(e-f), (a+b)*h,(a+b) * h * (c/d)]
-            })
-            .then((kqArr) => {
-              let kqCongNCPro2 = congPromise(kqArr[4], kqArr[2]);
-              kqCongNCPro2
-                .then((kqCongPro2) => {
-                  kqArr.push(kqCongPro2);
-                  return kqArr; // [(a+b), (c/d),(e-f), (a+b)*h,(a+b) * h * (c/d), (a+b) * h * (c/d) +(e-f)]
-                })
-                .then((kqAr) => {
-                  let kqChiaNCPro2 = chiaPromise(kqAr[5], 2);
-                  kqChiaNCPro2.then((result) =>
-                    console.log(`ket qua cuoi cung: ${result}`)
-                  );
-                });
-            });
-        });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
-const phepTinhNCPromise1 = (a, b, c, d, e, f, h) => {
-  Promise.all([congPromise(a, b), chiaPromise(c, d), truPromise(e, f)])
-    // .then((kqArr) => {
-    //   return kqArr; // [(a+b), (c/d),(e-f)]
-    // })
-    .then((kqArr) => {
-      return nhanPromise(kqArr[0], h)
+      // sau khi co array thi cac promise sau se chay trong array nay
+      return nhanPromise(kqArr[0], h) // chay promise trong promise object
         .then((result) => {
           return nhanPromise(result, kqArr[1]);
         })
@@ -215,54 +176,13 @@ const phepTinhNCPromise1 = (a, b, c, d, e, f, h) => {
         })
         .then((result) => console.log(`ket qua cuoi cung ${result}`));
     })
-    // let kqNhanNCPro2 = nhanPromise(kqArr[0], h);
-    // kqNhanNCPro2
-    //   .then((kqNhanPro2) => {
-    //     kqArr.push(kqNhanPro2);
-    //     return kqArr; //[(a+b), (c/d),(e-f), (a+b)*h]
-    //   })
-    //   .then((kqArr) => {
-    //     let kqNhanNCPro3 = nhanPromise(kqArr[3], kqArr[1]);
-    //     kqNhanNCPro3
-    //       .then((kqNhanPro3) => {
-    //         kqArr.push(kqNhanPro3);
-    //         return kqArr; // [(a+b), (c/d),(e-f), (a+b)*h,(a+b) * h * (c/d)]
-    //       })
-    //       .then((kqArr) => {
-    //         let kqCongNCPro2 = congPromise(kqArr[4], kqArr[2]);
-    //         kqCongNCPro2
-    //           .then((kqCongPro2) => {
-    //             kqArr.push(kqCongPro2);
-    //             return kqArr; // [(a+b), (c/d),(e-f), (a+b)*h,(a+b) * h * (c/d), (a+b) * h * (c/d) +(e-f)]
-    //           })
-    //           .then((kqAr) => {
-    //             let kqChiaNCPro2 = chiaPromise(kqAr[5], 2);
-    //             kqChiaNCPro2.then((result) =>
-    //               console.log(`ket qua cuoi cung: ${result}`)
 
     .catch((error) => {
       console.log(error);
     });
 };
 
-// congPromise(a, b)
-//   .then((kqCongPro1) => {
-//     return truPromise(kqCongPro1, c);
-//   })
-//   .then((kqTruPromise1) => {
-//     return nhanPromise(kqTruPromise1, d);
-//   })
-//   .then((kqNhanPromise) => {
-//     return chiaPromise(kqNhanPromise, e);
-//   })
-//   .then((kqChiaPromise1) => {
-//     console.log(`ket qua cuoi: ${kqChiaPromise1}`);
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//   });
-// phepTinhNCPromise(3, 5, 6, 4, 5, 3, 2, 5);
-phepTinhNCPromise1(3, 5, 6, 4, 5, 3, 2, 5);
+phepTinhNCPromise(3, 5, 6, 4, 5, 3, 2, 5);
 // ((a + b -c) * d)/e
 
 // phepTinh(5, 6, 3, 4, 2, 5, 10);
@@ -270,8 +190,6 @@ phepTinhNCPromise1(3, 5, 6, 4, 5, 3, 2, 5);
 // sinh ra 2 cái để xử lý bất đồng bộ: Promise, Async await
 
 // xu ly bai tap tren theo dang promise
-
-
 
 // all
 // all xu ly error: khi xu ly cac promise, promise dau tien co error thi se chuyen error ay vo catch cua all, con nhung error khac ko nhan
