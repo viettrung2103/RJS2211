@@ -1,3 +1,5 @@
+var readlineSync = require("readline-sync");
+
 let svArr = [];
 // const INDEX = 0;
 
@@ -53,6 +55,10 @@ const timSVById = (id) => {
   }
   console.log(`sinh vien voi id ${id} khong ton tai`);
   return foundId;
+};
+
+const danhSachSV = () => {
+  return svArr;
 };
 // xoa sinh voi id # va tra ve mang sinh vien khong co sinh vien voi id#
 const xoaSV = (id) => {
@@ -127,23 +133,21 @@ const invertbyAge = () => {
   return sortedByAge;
 };
 
-console.log(svArr);
+console.log(svArr); // call svArr
 console.log(createSV("Trung", 18, "nam"));
-console.log(svArr);
 console.log(createSV("Nam", 20, "nam"));
 console.log(createSV("Ha", 20, "nu"));
 console.log(createSV("Nam1", 25, "nu"));
 console.log(createSV("Ha3", 24, "nu"));
-console.log(svArr);
 console.log(createSV("Trinh", 25, "nu"));
-console.log(svArr);
-console.log(`tim sv voi id 5: ${timSVById(5)}`);
-let newArray = xoaSV(5);
-console.log(newArray);
-console.log(svArr[0]);
-console.log(timSVById(1));
+console.log(svArr); // kiem tra Arr
+// console.log(`tim sv voi id 5: ${timSVById(5)}`);
+// let newArray = xoaSV(5);
+// console.log(newArray);
+// console.log(svArr[0]);
+// console.log(timSVById(1));
 // console.log(editSV(1, "trung111", 2000, "nu"));
-console.log(timSVByName("Trinh"));
+// console.log(timSVByName("Trinh"));
 // console.log(sortbyname(svArr));
 // const sortedbyName = svArr.sort(function (a, b) {
 //   return a.name.localeCompare(b.name, "vi", { sensitivity: "base" });
@@ -162,3 +166,53 @@ console.log(timSVByName("Trinh"));
 // console.log(invertbyAge());
 // console.log(svArr[0]);
 // console.log(svArr);
+
+// Wait for user's response.
+var userName = readlineSync.question("May I have your name? ");
+var age = readlineSync.question("May I have your age? ");
+console.log(`Hi ${userName} with age ${age}`);
+console.log(`------------------------`);
+console.log(`CHUONG TRINH QUAN LY SINH VIEN`);
+console.log(`------------------------`);
+commands = [
+  "Show all student",
+  "Create student and return Menu",
+  "Delete student",
+  "Edit student",
+  "Find student by name",
+  "Sort student by name ascending",
+  "Sort student by age ascending ",
+];
+while (true) {
+  index = readlineSync.keyInSelect(commands, `Ban chon gi?`, {
+    cancel: "Exit",
+  });
+  console.log(`${commands[index]} duoc chon`);
+  if (commands[index] === undefined) {
+    // thoat khoi chuong trinh
+    console.log("Chuan bi thoat khoi chuong trinh");
+    readlineSync.keyInPause("Dang thoat khoi chuong trinh ...");
+    console.log(`Da Thoat Khoi Chuong Trinh!!`);
+    console.log("Hen Gap Ban Lan Sau!!");
+    break;
+  }
+  switch (index) {
+    case 0:
+      console.log(`chay chuong trinhn hien thong tin hoc sinh`);
+      readlineSync.keyInPause("Dang trich xuat du lieu...");
+      console.log(`Trich xuat du lieu thanh cong`);
+      console.log(danhSachSV());
+      readlineSync.keyInPause("Quay tro lai bang dieu khien...");
+    case 5:
+      console.log(sortByName());
+    case 6:
+      console.log(sortByAge());
+  }
+
+  // console.log();
+}
+
+// var readlineSync = require("readline-sync"),
+//   animals = ["Lion", "Elephant", "Crocodile", "Giraffe", "Hippo"],
+//   index = readlineSync.keyInSelect(animals, "Which animal?");
+// console.log("Ok, " + animals[index] + " goes to your room.");
