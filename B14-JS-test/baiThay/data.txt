@@ -1,0 +1,1 @@
+[{"id":"1","name":"trung11","age":"25","sex":"female","entranceGrade":"5","mediumGrade":"9"},{"id":2,"name":"Trung123","age":"25","sex":"female","entranceGrade":"9","mediumGrade":"10"},{"id":3,"name":"Tung","age":"30","sex":"male","entranceGrade":"9","mediumGrade":"6"}]
