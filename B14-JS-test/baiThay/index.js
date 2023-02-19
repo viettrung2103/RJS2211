@@ -58,56 +58,70 @@ const createStudent = () => {
     // ton tai array
     index = studentJSON[studentJSON.length - 1].id + 1;
     let name = readlineSync.question("name?");
-    let age = readlineSync.question("age?");
+    let age = parseInt(readlineSync.question("age?"));
     let sex = readlineSync.keyInSelect(indexSex, "sex? [0: male, 1: female]");
-    let entranceGrade = readlineSync.question(`diem dau vao?`);
-    let mediumGrade = readlineSync.question(`diem trung binh?`);
+    let entranceGrade = parseInt(readlineSync.question(`diem dau vao?`));
+    let mediumGrade = parseInt(readlineSync.question(`diem trung binh?`));
     studentJSON.push({
       id: index,
       name: name,
       age: age,
       sex: indexSex[sex],
-      "entrance-grade": entranceGrade,
-      "medium-grade": mediumGrade,
+      entranceGrade: entranceGrade,
+      mediumGrade: mediumGrade,
     });
   } else {
     // array rong
     index = index + 1;
     let name = readlineSync.question("name?");
-    let age = readlineSync.question("age?");
+    let age = parseInt(readlineSync.question("age?"));
     let sex = readlineSync.keyInSelect(indexSex, "sex? [0: male, 1: female]");
-    let entranceGrade = readlineSync.question(`diem dau vao?`);
-    let mediumGrade = readlineSync.question(`diem trung binh?`);
+    let entranceGrade = parseInt(readlineSync.question(`diem dau vao?`));
+    let mediumGrade = parseInt(readlineSync.question(`diem trung binh?`));
     studentJSON.push({
       id: index,
       name: name,
       age: age,
       sex: indexSex[sex],
-      entraceGrade: entranceGrade,
+      entranceGrade: entranceGrade,
       mediumGrade: mediumGrade,
     });
   }
+  readlineSync.keyInPause(`hoan tat`);
   saveFile();
 };
-const deleteStudent = () => {
-  const name = readlineSync.question("What name?");
-  const filterWithoutName = studentJSON.filter((i) => i.name != name);
-  studentJSON = filterWithoutName;
+const deleteStudentById = () => {
+  const name = readlineSync.question("What id?");
+  const filterWithoutId = studentJSON.filter((i) => i.id != name);
+  studentJSON = filterWithoutId;
   saveFile();
 };
-const deleteManyStudentById = () => {};
+const deleteManyStudentById = () => {
+  const idListStr = readlineSync.question(
+    `What are the ids that you would like to delete? (seperate by ',')`
+  );
+  const idList = idListStr.split(",");
+  const idListConvert = idList.map((e) => parseInt(e));
+
+  const filterd = studentJSON.filter((el) => {
+    console.log(el.id);
+    return idListConvert.indexOf(el.id) === -1; //
+  });
+  studentJSON = filterd;
+  saveFile();
+};
 const editStudentById = () => {
   const findId = parseInt(readlineSync.question("What id do you want edit?"));
   let indexId = studentJSON.findIndex((i) => i.id === findId); // return index cua object can tim trong array, -1 neu khong co
   if (indexId >= 0) {
     let nameEdit = readlineSync.question("name? ");
-    let ageEdit = readlineSync.question("age? ");
+    let ageEdit = parseInt(readlineSync.question("age? "));
     let sexEdit = readlineSync.keyInSelect(
       indexSex,
       "sex? [0: male, 1: female]"
     );
-    let entranceGradeEdit = readlineSync.question("entrance grade? ");
-    let mediumGradeEdit = readlineSync.question("medium?  ");
+    let entranceGradeEdit = parseInt(readlineSync.question("entrance grade? "));
+    let mediumGradeEdit = parseInt(readlineSync.question("medium grade?  "));
     const newStudent = {
       id: findId,
       name: nameEdit,
@@ -117,7 +131,7 @@ const editStudentById = () => {
       mediumGrade: mediumGradeEdit,
     };
 
-    studentJSON.splice(indexId, 1, newStudent);
+    studentJSON.splice(indexId, 1, newStudent); // bat dau tu vi tri index, xoa 1 index, va them vao newStudent o vi tri do
     saveFile();
   } else {
     console.log("Không tìm thấy id");
@@ -133,10 +147,19 @@ const findStudentByName = () => {
     console.log(`Khong tim thay hoc sinh voi ten: ${nameEdit}`);
   }
 };
-const findHighestEntranceStudent = () => {};
+const findHighestEntranceStudent = () => {
+  const sortedByEntranceASC = studentJSON.sort((current, next) => {
+    return current.entranceGrade - next.entranceGrade;
+  });
+  const highestEntraceGrade =
+    sortedByEntranceASC[sortedByEntranceASC.length - 1];
+  console.log(highestEntraceGrade);
+};
 const showWarningStudentsBelow4 = () => {
-  // const warningList = student.JSON.filter((i) => {
-  // })
+  const warningList = studentJSON.filter((i) => {
+    return i.mediumGrade < 4;
+  });
+  console.log(warningList);
 };
 const sortStudentByMediumGradeASC = () => {
   const sortedByGradeASC = studentJSON.sort((current, next) => {
@@ -177,7 +200,7 @@ while (true) {
       chose = 0;
       break;
     case 3:
-      deleteStudent();
+      deleteStudentById();
       chose = 0;
       break;
     case 4:
