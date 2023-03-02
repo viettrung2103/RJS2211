@@ -10,6 +10,10 @@ class SinhVien {
     this.age = age;
     this.sex = sex;
   }
+  // const chuanHoaTen = (name) => {
+  //   let tenDcChuanHoa = name.toLowerCase();
+  //   return this.name = tenDcChuanHoa;
+  // }
 }
 
 // tao va them sinh vien vo array
@@ -48,7 +52,7 @@ const timSVById = (id) => {
   for (let index = 0; index <= svArr.length - 1; index++) {
     if (svArr[index].id === id) {
       console.log(`sinh vien voi id ${id} ton tai`);
-      return index;
+      return svArr[index];
     } else {
       foundId = false;
     }
@@ -61,9 +65,9 @@ const danhSachSV = () => {
   return svArr;
 };
 // xoa sinh voi id # va tra ve mang sinh vien khong co sinh vien voi id#
-const xoaSV = (id) => {
-  timSVById(id);
-  if (timSVById(id) === "false") {
+const xoaSVById = (id) => {
+  let foundId = timSVById(id); //return false if no id, return student info with given id when true
+  if (foundId === "false") {
     console.log(`sinh vien voi id ${id} khong ton tai`);
   } else {
     let arrMoi = [];
@@ -86,18 +90,25 @@ const editSV = (id, name, age, sex) => {
   if (timSVById(id) === "false") {
     console.log(`khong ton tai sinh vien voi id: ${id}`);
   } else {
-    svArr[timSVById(id)].name = name;
-    svArr[timSVById(id)].age = age;
-    svArr[timSVById(id)].sex = sex;
+    console.log(`thong tin hien tai`);
+    console.log(`${timSVById(id)}`);
+    timSVById(id).name = name;
+    timSVById(id).age = age;
+    timSVById(id).sex = sex;
     console.log(`update; ${id}, name:${name},age:${age},sex: ${sex}`);
     return svArr[timSVById(id)];
   }
 };
 
-const timSVByName = (name) => {
-  const filteredName = svArr.filter((x) => x.name === "Trinh");
+const timSVByName = (keyword) => {
+  const filteredName = svArr.filter((x) => x.name === keyword);
   return filteredName;
 };
+
+// const timSVById = (id) => {
+//   const filteredName = svArr.filter((x) => x.id === id);
+//   return filteredName;
+// };
 
 const sortByName = () => {
   const sortedByName = svArr.sort(function (current, next) {
@@ -133,20 +144,21 @@ const invertbyAge = () => {
   return sortedByAge;
 };
 
-console.log(svArr); // call svArr
-console.log(createSV("Trung", 18, "nam"));
-console.log(createSV("Nam", 20, "nam"));
-console.log(createSV("Ha", 20, "nu"));
-console.log(createSV("Nam1", 25, "nu"));
-console.log(createSV("Ha3", 24, "nu"));
-console.log(createSV("Trinh", 25, "nu"));
-console.log(svArr); // kiem tra Arr
+// console.log(svArr); // call svArr
+// console.log(createSV("Trung", 18, "nam"));
+// console.log(createSV("Nam", 20, "nam"));
+// console.log(createSV("Ha", 20, "nu"));
+// console.log(createSV("Nam1", 25, "nu"));
+// console.log(createSV("Ha3", 24, "nu"));
+// console.log(createSV("Trinh", 25, "nu"));
+// console.log(svArr); // kiem tra Arr
 // console.log(`tim sv voi id 5: ${timSVById(5)}`);
-// let newArray = xoaSV(5);
+// let newArray = xoaSVById(5);
 // console.log(newArray);
 // console.log(svArr[0]);
 // console.log(timSVById(1));
 // console.log(editSV(1, "trung111", 2000, "nu"));
+// console.log(svArr); // kiem tra Arr
 // console.log(timSVByName("Trinh"));
 // console.log(sortbyname(svArr));
 // const sortedbyName = svArr.sort(function (a, b) {
@@ -168,51 +180,113 @@ console.log(svArr); // kiem tra Arr
 // console.log(svArr);
 
 // Wait for user's response.
-var userName = readlineSync.question("May I have your name? ");
-var age = readlineSync.question("May I have your age? ");
-console.log(`Hi ${userName} with age ${age}`);
-console.log(`------------------------`);
-console.log(`CHUONG TRINH QUAN LY SINH VIEN`);
-console.log(`------------------------`);
-commands = [
-  "Show all student",
-  "Create student and return Menu",
-  "Delete student",
-  "Edit student",
-  "Find student by name",
-  "Sort student by name ascending",
-  "Sort student by age ascending ",
-];
-while (true) {
-  index = readlineSync.keyInSelect(commands, `Ban chon gi?`, {
-    cancel: "Exit",
-  });
-  console.log(`${commands[index]} duoc chon`);
-  if (commands[index] === undefined) {
-    // thoat khoi chuong trinh
-    console.log("Chuan bi thoat khoi chuong trinh");
-    readlineSync.keyInPause("Dang thoat khoi chuong trinh ...");
-    console.log(`Da Thoat Khoi Chuong Trinh!!`);
-    console.log("Hen Gap Ban Lan Sau!!");
-    break;
-  }
-  switch (index) {
-    case 0:
-      console.log(`chay chuong trinhn hien thong tin hoc sinh`);
-      readlineSync.keyInPause("Dang trich xuat du lieu...");
-      console.log(`Trich xuat du lieu thanh cong`);
-      console.log(danhSachSV());
-      readlineSync.keyInPause("Quay tro lai bang dieu khien...");
-    case 5:
-      console.log(sortByName());
-    case 6:
-      console.log(sortByAge());
-  }
 
-  // console.log();
+data = [
+  { id: "Tung", age: 38, gender: "nam" },
+  { id: "Trung", age: 20, gender: "nam" },
+  { id: "Trinh", age: 25, gender: "nu" },
+  { id: "Trinh1", age: 30, gender: "nam" },
+];
+// de luu data vo txt thi can la string type >> stringify
+// de lay data va xu ly thi can parse
+const stringData = JSON.stringify(data);
+
+console.log(stringData);
+const data1 = JSON.parse(stringData);
+console.log(data1);
+
+const readFile = () => {
+  c
 }
 
-// var readlineSync = require("readline-sync"),
-//   animals = ["Lion", "Elephant", "Crocodile", "Giraffe", "Hippo"],
-//   index = readlineSync.keyInSelect(animals, "Which animal?");
-// console.log("Ok, " + animals[index] + " goes to your room.");
+// var userName = readlineSync.question("May I have your name? ");
+// var age = readlineSync.question("May I have your age? ");
+// console.log(`Hi ${userName} with age ${age}`);
+// console.log(`------------------------`);
+// console.log(`CHUONG TRINH QUAN LY SINH VIEN`);
+// console.log(`------------------------`);
+// const showMenu = () => {
+//   commands = [
+//     "Show all student",
+//     "Create student and return Menu",
+//     "Delete student",
+//     "Edit student",
+//     "Find student by name",
+//     "Sort student by name ascending",
+//     "Sort student by age ascending ",
+//   ];
+//   while (true) {
+//     index = readlineSync.keyInSelect(commands, `Ban chon gi?`, {
+//       cancel: "Exit",
+//     });
+//     console.log(`${commands[index]} duoc chon`);
+//     if (commands[index] === undefined) {
+//       // thoat khoi chuong trinh
+//       console.log("Chuan bi thoat khoi chuong trinh");
+//       readlineSync.keyInPause("Dang thoat khoi chuong trinh ...");
+//       console.log(`Da Thoat Khoi Chuong Trinh!!`);
+//       console.log("Hen Gap Ban Lan Sau!!");
+//       break;
+//     } else {
+//       switch (index) {
+//         case 0: // hien list hs
+//           console.log(`chay chuong trinhn hien thong tin hoc sinh`);
+//           readlineSync.keyInPause("Dang trich xuat du lieu...");
+//           console.log(`Trich xuat du lieu thanh cong`);
+//           console.log(danhSachSV());
+//           readlineSync.keyInPause("Quay tro lai bang dieu khien...");
+//           break;
+//         case 1: //      "Create student and return Menu",
+//           console.log(`Nhap Thong Tinh Sinh Vien Moi:`);
+//           name = readlineSync.question(`Ten Sinh Vien:`);
+//           age = readlineSync.question(`Tuoi Sinh Vien:`);
+//           genderOption = ["nam", "nu", "khong xac dinh"];
+//           index = readlineSync.keyInSelect(
+//             genderOption,
+//             `Gioi Tinh Sinh Vien:`
+//           );
+//           console.log(createSV(name, age, genderOption[index]));
+//           break;
+//         case 2: //            "Delete student",
+//           console.log(`working this feature`);
+//           var id = readlineSync.question("Nhap id sinh vien muon xoa:");
+//           console.log(xoaSVById(id));
+//           break;
+//         case 3: //      "      "Edit student",
+//           console.log(`Working on this feature`);
+//           id = readlineSync.question(`Nhap Id Sinh Vien:`);
+//           // if (timSVById(id) === false) {
+//           //   break;
+//           // } else {
+//           //   console.log(timSVById(id));
+//           console.log(`thay doi thong tin sinh vien voi id ${id}:`);
+//           name = readlineSync.question(`Ten Sinh Vien:`);
+//           age = readlineSync.question(`Tuoi Sinh Vien:`);
+//           genderOption = ["nam", "nu", "khong xac dinh"];
+//           index = readlineSync.keyInSelect(
+//             genderOption,
+//             `Gioi Tinh Sinh Vien:`
+//           );
+//           console.log(editSV(id, name, age, genderOption[index]));
+//           break;
+//         // let svById = timSVById(id);
+//         case 4: //            "Find student by name",
+//           var name = readlineSync.question(
+//             "Nhap ten sinh vien muon tim (Case sensitive) :"
+//           );
+//           readlineSync.keyInPause("Dang trich xuat du lieu...");
+//           console.log(timSVByName(name));
+//           readlineSync.keyInPause("Hoan Thanh");
+//           break;
+//         case 5: //sap xep theo ten tang dan
+//           console.log(sortByName());
+//           break;
+//         case 6: // sap xep theo tuoi tang dan
+//           console.log(sortByAge());
+//           break;
+//       }
+//     }
+//   }
+// };
+
+// showmenu();

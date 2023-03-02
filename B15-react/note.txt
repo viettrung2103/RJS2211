@@ -1,0 +1,9 @@
+event HTML
+ten component duoc tai su dung se viet hoa chu cai dau tien
+
+Về cơ bản chỉ là 2 cách khác nhau để làm react thôi
+viết bằng class là sử dụng class trong JS để xử lý logic
+viết bằng hook là sử dụng function trong js để xử lý logic. 
+mỗi cái sẽ có những hàm đặc thù để xử lý
+ví dụ hook dùng useState để control và set state
+class dùng this.setState() để control và set state

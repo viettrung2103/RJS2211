@@ -1,1 +1,1 @@
-[{"id":1,"name":"trung","tuoi":29,"gioiTinh":"nam"}]
+[{"id":"Tung","age":38,"gender":"nam"},{"id":"Trung","age":20,"gender":"nam"},{"id":"Trinh","age":25,"gender":"nu"},{"id":"Trinh1","age":30,"gender":"nam"}]
