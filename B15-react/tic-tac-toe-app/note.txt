@@ -1,0 +1,2 @@
+prop: to pass the value from the parent to the child
+useState: to remember and render thing
