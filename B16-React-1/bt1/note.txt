@@ -1,0 +1,6 @@
+Bt: 
+
+Tạo 3 component: Menu, Body, Footer bọc trong 1 component Main
+Main: sẽ có state showFooter, button toggle ( click để show, hide footer)
+Main: truyền dữ liệu là 1 list student -> Body 
+Body: Hiển thị List student với UI. 

@@ -1,0 +1,18 @@
+.wrap-child {
+  background-color: #f5f5f5;
+}
+.parent-click {
+  cursor: pointer;
+}
+
+.product {
+  background-color: red;
+  color: white;
+  margin: 20px;
+  padding: 10px;
+}
+
+.cartItem {
+  height: 100px;
+  width: 100px;
+}

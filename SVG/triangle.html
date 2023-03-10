@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=A, initial-scale=1.0">
+  <title>Animated SVG button</title>
+  <style>
+    :root{
+      --dark-color: #635bff;
+      --light-color: #80e9ff;
+    }
+    svg {
+      cursor:pointer;
+    }
+
+    #darkGroup{
+      fill: var(--dark-color)
+    }
+    #lightGroup{
+      fill: var(--light-color)
+    }
+    #dark1,
+    #dark2,
+    #light1 {
+      transition: all 1s ease;
+    }
+    #dark2 {
+      transform: translateX(-100%); 
+      /* move to left */
+    } 
+    svg:hover #light1 {
+      transform: translateX(20%);
+    }
+    svg:hover #dark1 {
+      transform: translateX(40%);
+      opacity:0;
+    }
+    svg:hover #dark2 {
+      transform: translateX(0%);
+    }
+  </style>
+</head>
+<body>
+  <svg width="120" height="100" viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="triangles" clip-path="url(#clip0_0_1)">
+      <rect width="120" height="100" fill="white"/>
+      <g id="lightGroup">
+        <path id="light1" opacity="0.7" d="M47 48.268C48.3333 49.0378 48.3333 50.9623 47 51.7321L12.5 71.6506C11.1667 72.4204 9.5 71.4582 9.5 69.9186V30.0814C9.5 28.5418 11.1667 27.5796 12.5 28.3494L47 48.268Z" />
+      </g>
+      <g id="darkGroup">
+        <path id="dark1" opacity="0.7" d="M62.5 48.6506C63.8333 49.4204 63.8333 51.3449 62.5 52.1147L28 72.0333C26.6667 72.8031 25 71.8409 25 70.3013V30.4641C25 28.9245 26.6667 27.9622 28 28.732L62.5 48.6506Z" />
+        <path id="dark2" opacity="0.7" d="M47 48.268C48.3333 49.0378 48.3333 50.9623 47 51.7321L12.5 71.6506C11.1667 72.4204 9.5 71.4582 9.5 69.9186V30.0814C9.5 28.5418 11.1667 27.5796 12.5 28.3494L47 48.268Z" />
+      </g>
+    </g>
+    <defs>
+    <clipPath id="clip0_0_1">
+    <rect width="120" height="100" fill="white"/>
+    </clipPath>
+    </defs>
+    </svg>
+    <script>
+      const svg = document.getElementById('triangles');
+      svg.onclick = (e) => {
+        const colors = ['red','blue','green','orange','pink','purple'];
+        const random =() => colors[Math.floor(Math.random()*colors.length)]
+        document.documentElement.style.cssText = `
+        --dark-color: ${random()};
+        --light-color: ${random()};
+        `
+      }
+    </script>
+</body>
+</html>
