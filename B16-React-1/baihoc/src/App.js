@@ -1,11 +1,9 @@
-
-import './App.css';
-import RandomProject from './components/Main';
+import "./App.css";
+import RandomProject from "./components/Main";
+import TodosApp from "./TodosApp/components";
 
 function App() {
-  return (
-    <RandomProject/>
-  );
+  return <TodosApp />;
 }
 
 export default App;

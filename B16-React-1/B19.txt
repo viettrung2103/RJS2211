@@ -18,4 +18,5 @@ scrum:
 tat ca member cung lam va cung kiem dinh du an qua tung moc
 axios
 
-zsh
+zsh >> command de co mau
+rsc
