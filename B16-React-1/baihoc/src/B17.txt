@@ -1,0 +1,10 @@
+- UseEffect
+- Thực hành random number project
+
+-- UseEffect
+LifeCycle:
+ly do clear data vi khi 1 component dc khoi tao, no se co nhieu data
+vdu nhu luc chat: luc bat dau chat thi se luon nhận tin nhắn mới, nhưng sau khi tắt messenger, thì sẽ xoa việc nhận tin nhắn
+mounting: []: chay khi array rong
+update []:
+unmounting

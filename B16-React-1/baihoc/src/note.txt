@@ -1,0 +1,8 @@
+state: thay doi duoc
+prop: không thay đổi dc
+khi thay đổi state thì sử dụng hàm useState
+
+rsc: create Component
+ush: useSate
+ueh = useEffect
+useEffect = 

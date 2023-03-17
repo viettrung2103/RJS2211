@@ -1,0 +1,21 @@
+
+mo hinh waterfall
+1/BE lam truoc, >> output: API
+2/FE: API >> hien thi ten giao dien
+
+thuc te:
+BE va FE start dong thoi.
+thong nhat FE va BE
+
+waterfall: mo hinh van hanh du an
+
+waterfal: thac nuoc
+1. design se lam 1 luot
+2. BE lam het 1 luot
+3. FE lam het 1 luot
+
+scrum: 
+tat ca member cung lam va cung kiem dinh du an qua tung moc
+axios
+
+zsh

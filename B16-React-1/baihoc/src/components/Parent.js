@@ -15,6 +15,7 @@ const Parent = () => {
     { name: "Nokia", price: 30000, img: "https://picsum.photos/200" },
     { name: "Microsoft", price: 50000, img: "https://picsum.photos/200" },
   ]);
+  const [childData, setChildData] = useState();
   //tat ca event nhan vao 1 function chu khong chay function
   const toogleChild = () => {
     console.log("Click");
@@ -27,11 +28,24 @@ const Parent = () => {
   // {() => ...}
   // function co tham so : truyen truc tiep vao event
   // function co tham so: boc trong 1 function khac
+
+  // tao 1 callback function de hung' data tu con
+  const handleClickChild = (data) => {
+    console.log(`log data == ${data}`);
+    setChildData(data);
+    setNumber(data);
+  };
+
+  // const resetChildData = () => {
+  //   setChildData(0);
+  // };
+
   return (
     <div>
       <h2 onMouseOver={() => increaseCount(10)} className="parent-click">
         Parent
       </h2>
+      <p>{childData}</p>
       <p>Function khong co tham so</p>
       <Button onClick={toogleChild} variant="success">
         Toggle Child
@@ -43,17 +57,22 @@ const Parent = () => {
         }}
         variant="primary"
       >
-        Primary
+        Increse
       </Button>{" "}
       <p>{number}</p>
       {showLight === true ? (
-        <Child dataFromParent={number} name={"Tung"} />
+        <Child
+          handleClickChild={handleClickChild}
+          dataFromParent={number}
+          name={"Tung"}
+          // resetChildData={resetChildData}
+        />
       ) : null}
-      <Row className="d-flex justify-content-center align-items-center">
+      {/* <Row className="d-flex justify-content-center align-items-center">
         {products.map((product, index) => {
           return <CardItem dataItem={product} />;
         })}
-      </Row>
+      </Row> */}
     </div>
   );
 };
