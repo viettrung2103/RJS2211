@@ -13,6 +13,7 @@ const TodosApp = () => {
   const [loading, setLoading] = useState(false);
   const [edit, setEdit] = useState(false);
   const [add, setAdd] = useState(false);
+  const [valueId, setValueId] = useState("");
 
   //fetch du lieu truoc khi render du lieu
   useEffect(() => {
@@ -20,13 +21,23 @@ const TodosApp = () => {
   }, []);
 
   const getListTodos = async () => {
+    if (add) {
+      setAdd(true);
+    }
+    if (edit) {
+      setEdit(true);
+    }
     setLoading(true);
+    setValueName("");
+    setValueDes("");
     try {
       const result = await axios.get(URL); // if there is error, run error block, so need one more setLoading(error) in error block
       setLoading(false); // while waiting for data, show loading status on screen
       setTodos(result.data);
     } catch (error) {
       setLoading(false);
+      setAdd(true);
+      setEdit(false);
       setError(`Co loi xay ra`);
     }
   };
@@ -36,9 +47,13 @@ const TodosApp = () => {
     try {
       await axios.delete(`${URL}/${id}`);
       setLoading(false);
+      setAdd(true);
+      setEdit(false);
       getListTodos();
     } catch (error) {
       setLoading(false);
+      setAdd(true);
+      setEdit(false);
       setError(`Co loi xay ra`);
     }
   };
@@ -68,10 +83,25 @@ const TodosApp = () => {
     setEdit(true);
     setValueName(item.name);
     setValueDes(item.description);
+    setValueId(item.id);
   };
 
-  const editItem = () => {
-    console.log("Edit Item");
+  const editItem = async (id) => {
+    try {
+      await axios.put(`${URL}/${id}`, {
+        id: valueId,
+        name: valueName,
+        isCheck: false,
+        description: valueDes,
+      });
+      setLoading(false);
+      setAdd(true);
+      setEdit(false);
+      getListTodos();
+    } catch (error) {
+      setLoading(false);
+      setError(`Co loi xay ra`);
+    }
   };
   // khi fetch api>> vi la promise nen can phai check xem co du lieu k
   return (
@@ -105,7 +135,7 @@ const TodosApp = () => {
             Add
           </Button>
         ) : edit ? (
-          <Button onClick={editItem} variant="warning">
+          <Button onClick={() => editItem(valueId)} variant="warning">
             Edit
           </Button>
         ) : null}
