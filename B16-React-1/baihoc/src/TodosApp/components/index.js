@@ -12,7 +12,7 @@ const TodosApp = () => {
   const [valueDes, setValueDes] = useState("");
   const [loading, setLoading] = useState(false);
   const [edit, setEdit] = useState(false);
-  const [add, setAdd] = useState(false);
+  const [add, setAdd] = useState(true);
   const [valueId, setValueId] = useState("");
 
   //fetch du lieu truoc khi render du lieu
@@ -103,6 +103,16 @@ const TodosApp = () => {
       setError(`Co loi xay ra`);
     }
   };
+
+  const resetData = () => {
+    setLoading(false);
+    setAdd(true);
+    setEdit(false);
+    setValueName("");
+    setValueDes("");
+    getListTodos();
+  };
+
   // khi fetch api>> vi la promise nen can phai check xem co du lieu k
   return (
     <div>

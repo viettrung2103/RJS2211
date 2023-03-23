@@ -1,0 +1,21 @@
+Overview:
+- syntax react
++ logic trong UI, logic trong style
+style : color: "string" {}
+
+rsc: create component
+
+state, prop:
+state data trong component
+prop: data, function truyen giua cac component ,   -ush
++ lifecycle: useEffect:  -ueh
+    ++ []: chay luc dau, mounting, dependency rong,,vd: call API
+    ++ []: on update, khi array ko rong, khi state update thi useEffect nay se chay
+    ++ return: on unmount, dung toi return, vd: khi clear data, vdu nhu muon clear text trong chat history
++ API: tuong tac voi API
+
+imp : import
+log: console.log()
+meth: function
+
+
