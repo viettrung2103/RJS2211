@@ -1,0 +1,3 @@
+- thuc hanh voi api
+- ki nang tim kiem => tren doc.
+-

@@ -13,6 +13,7 @@ const TodoMVC = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [checkedList, setCheckedState] = useState([]);
   const [isEdit, setIsEdit] = useState(null);
+  const [valueItemName, setvalueItemName] = useState("");
   const [valueIsCheck, setValueIsCheck] = useState(false);
   const [totalUncheck, setTotalUncheck] = useState(0);
 
@@ -151,11 +152,17 @@ const TodoMVC = () => {
                           type="checkbox"
                           name="languages"
                           value={item.isChecked}
-                          onChange={handleSelect}
+                          onChange={(e) => handleSelect(e, item)}
                         />
                       </span>
                       {isEdit && isEdit === item.id ? (
-                        <input value={valueName} type="text" />
+                        <input
+                          value={valueName}
+                          onChange={(e) => {
+                            setvalueItemName(e.target.value);
+                          }}
+                          type="text"
+                        />
                       ) : (
                         <div>
                           <span>
