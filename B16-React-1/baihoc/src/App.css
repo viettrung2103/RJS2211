@@ -20,3 +20,7 @@
 .text-click {
   cursor: pointer;
 }
+
+.checked-item {
+  text-decoration: line-through;
+}

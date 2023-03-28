@@ -1,0 +1,8 @@
+view: IU
+state: data
+action: hanh dong thay doi data
+
+store: noi luu tru nhieu data (name, todos, counter, listProducts) => database
+reducer:Moi loai data trong store =>  giong nhu cac table, bang trong database(user, product, todo)
+dispatch: thuc thi actions. vd: action changeName, dispatch(changeName)
+

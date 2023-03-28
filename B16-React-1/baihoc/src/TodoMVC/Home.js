@@ -3,6 +3,8 @@ import { Form, Button } from "react-bootstrap";
 
 import axios from "axios";
 
+import { useSelector } from "react-redux";
+
 const URL = "https://64145bef36020cecfda6550f.mockapi.io/todoMVC";
 
 const TodoMVC = () => {
@@ -113,8 +115,6 @@ const TodoMVC = () => {
     try {
       await axios.put(`${URL}/${id}`, {
         name: valueItemName,
-        isChecked: valueIsCheck,
-        id: id,
       });
       resetData();
       setIsLoad(false);
@@ -127,94 +127,45 @@ const TodoMVC = () => {
   const resetData = () => {
     setIsEdit(null);
     getListTodos();
+    getCheckedList();
   };
-  // const resetData = () => {
-  //   setValueName("");
-  //   getListTodos();
-  // };
-  // khi check thi
 
-  // const handleOnChange = (position) => {
-  //   const updateCheckedState = checkedState.map((item, index) =>
-  //     index === position ? !item : item
-  //   );
-  //   setCheckedState(updateCheckedState);
-  //   console.log(checkedState);
-  // };
-  // const handleOnChange = () => {
-  //   console.log(isChecked);
-  //   setIsChecked(!isChecked);
-  // };
-
-  // const handleSelect = (event, item) => {
-  //   setIsLoad(true);
-  //   setIsCheckedMode(item.id);
-  //   setvalueItemName(item.name);
-  //   // const value = event.target.value;
-  //   const isChecked = event.target.checked;
-  //   setValueIsCheck(isChecked);
-  //   console.log(`${item.id}item name : ${item.name}, check: ${isChecked}`);
-  //   editItem(isCheckedMode);
-  //   if (isChecked === true) {
-  //     // add checked item into checklist
-  //     setCheckedState([...checkedList, valueIsCheck]);
-  //   } else {
-  //     // remove unchecked item from checklist
-  //     // setValueIsCheck(isChecked);
-  //     // editItem(item.id);
-  //     const filteredList = checkedList.filter((item) => item !== isChecked);
-  //     setCheckedState(filteredList);
-  //   }
-  // };
-  // const handleCheck = (event, item) => {
-  //   const value = event.target.value; // default value
-  //   const isChecked = event.target.checked; // value khi click
-  //   console.log(`value: ${value}`);
-  //   console.log(`isCheck: ${isChecked}`);
-  //   let updateList = [...checkedList];
-
-  //   if (isChecked) {
-  //     updateList = [...updateList, value];
-  //     console.log(`updateList: ${updateList}`);
-  //     setCheckedList(updateList);
-  //   } else {
-  //     const filteredList = updateList.filter((item) => item !== value);
-  //     console.log(`filteredList:${filteredList}`);
-  //     setCheckedList(filteredList);
-  //   }
-  // };
-
-  const handleCheck = (event, current) => {
+  const handleCheck = async (event, current) => {
     // const isChecked = event.target.checked;
     const name = event.target.name;
     const id = event.target.id;
     const isChecked = event.target.checked;
+    console.log(
+      `handle check: name:${current.name},id:${id},check:${isChecked}`
+    );
+    // setvalueItemName(name);
+    // setValueIsCheck(isChecked);
     // console.log(`id:${id} name:${name},check:${isChecked}`);
     let updatedList = [...checkedList];
     if (isChecked) {
-      //   if (updatedList.includes(id)) {
-      //     console.log(`updatedList1:${updatedList}`);
-      //     setCheckedList(updatedList);
-      //   } else {
-      //   }
       updatedList = [...updatedList, id];
-      console.log("updateList1", updatedList);
+
       setCheckedList(updatedList);
-      // setCheckedList(updatedList);
-      // setvalueItemName(name);
-      // setValueIsCheck(isChecked);
-      // editItem(id);
+      // editItem(current.id);
     } else {
       let filteredList = updatedList.filter((id) => id !== current.id);
-      console.log("filterList", filteredList);
       setCheckedList(filteredList);
+      // editItem(id);
 
       // setvalueItemName(name);
       // setValueIsCheck(isChecked);
       // editItem(id);
+      // editItem(current.id);
     }
     console.log(isChecked);
-    setChecked(isChecked);
+    setvalueItemName(current.name);
+    await axios.put(`${URL}/${current.id}`, {
+      isChecked,
+    });
+    // getListTodos();
+
+    // setValueIsCheck(current.isChecked);
+    // editItem(current.id);
     setTodos(
       todos.map((todo) => {
         return todo !== current
@@ -225,7 +176,7 @@ const TodoMVC = () => {
   };
   const isCheckedItem = (item) => {
     const result = checkedList.includes(item.id);
-    // console.log(result);
+    // console.log("result", result);
     return result ? "checked-item" : "not-checked-item";
   };
   // checkedList.includes(item.id) ? "checked-item" : "not-checked-item";
@@ -261,6 +212,20 @@ const TodoMVC = () => {
   //   console.log(stateList);
   // };
 
+  const deleteAllChecked = async () => {
+    const uncheckedList = await Promise.all(
+      todos.filter((item) => {
+        if (item.isChecked) {
+          deleteItem(item.id);
+          return false; // item return false se ko dc giu trong filtered list
+        } else {
+          return true; // item nao dc return true thi se giu lai trong array
+        }
+      })
+      );
+      setTodos(uncheckedList);
+  };
+
   return (
     <div>
       <h1>Todos</h1>
@@ -278,6 +243,9 @@ const TodoMVC = () => {
         </Form.Group>
         <Button onClick={addToDo} variant="primary">
           Add
+        </Button>
+        <Button onClick={deleteAllChecked} variant="primary">
+          Delete All Checked
         </Button>
       </Form>
 
@@ -300,7 +268,7 @@ const TodoMVC = () => {
                       <span>
                         <input
                           type="checkbox"
-                          name={item.name}
+                          name={valueItemName}
                           checked={item.isChecked}
                           id={item.id}
                           className={checked === true ? "checked-item" : null}
@@ -342,9 +310,6 @@ const TodoMVC = () => {
               );
             })
           : null}
-        <li>
-          <span></span>
-        </li>
       </ul>
       {checkedList
         ? `con ${todos.length - checkedList.length} item can hoan thanh`
