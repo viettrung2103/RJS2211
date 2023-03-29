@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 
+import Header from "./components/Header";
+
 import axios from "axios";
 
 import { useSelector } from "react-redux";
-
+import AddForm from "./components/AddForm";
+import TodoList from "./components/TodoList";
+import Footer from "./components/Footer";
+import Error from "./components/Error";
 const URL = "https://64145bef36020cecfda6550f.mockapi.io/todoMVC";
 
 const TodoMVC = () => {
@@ -24,31 +29,7 @@ const TodoMVC = () => {
   useEffect(() => {
     getListTodos();
     getCheckedList();
-
-    // setCheckedState(new Array(todos.length).fill(false));
   }, []);
-
-  // const getCheckedList = async () => {
-  //   try {
-  //     const result = await axios.get(URL);
-  //     let checkedStateList = new Array(result.data.length.fill(false));
-  //     setCheckedState(checkedStateList);
-  //   } catch (error) {
-  //     setError(`co loi xay ra`);
-  //   }
-  // };
-
-  // const getStateList = async () => {
-  //   try {
-  //     const result = await axios.get(URL);
-  //     const stateList = result.data.maps((item, index) => {
-  //       return { id: item.id, isChecked: item.isChecked };
-  //     });
-  //     setCheckedList(stateList);
-  //   } catch (error) {
-  //     setError(`co loi xay ra`);
-  //   }
-  // };
 
   const getListTodos = async () => {
     setIsLoad(true);
@@ -56,9 +37,6 @@ const TodoMVC = () => {
       const result = await axios.get(URL);
       console.log("todo List:", result.data);
       setTodos(result.data);
-      // result.forEach((item) => {
-      //   item.isChecked = false;
-      // });
       setIsLoad(false);
     } catch (error) {
       setIsLoad(false);
@@ -131,41 +109,28 @@ const TodoMVC = () => {
   };
 
   const handleCheck = async (event, current) => {
-    // const isChecked = event.target.checked;
     const name = event.target.name;
     const id = event.target.id;
     const isChecked = event.target.checked;
     console.log(
       `handle check: name:${current.name},id:${id},check:${isChecked}`
     );
-    // setvalueItemName(name);
-    // setValueIsCheck(isChecked);
-    // console.log(`id:${id} name:${name},check:${isChecked}`);
+
     let updatedList = [...checkedList];
     if (isChecked) {
       updatedList = [...updatedList, id];
-
       setCheckedList(updatedList);
       // editItem(current.id);
     } else {
       let filteredList = updatedList.filter((id) => id !== current.id);
       setCheckedList(filteredList);
-      // editItem(id);
-
-      // setvalueItemName(name);
-      // setValueIsCheck(isChecked);
-      // editItem(id);
-      // editItem(current.id);
     }
     console.log(isChecked);
     setvalueItemName(current.name);
     await axios.put(`${URL}/${current.id}`, {
       isChecked,
     });
-    // getListTodos();
 
-    // setValueIsCheck(current.isChecked);
-    // editItem(current.id);
     setTodos(
       todos.map((todo) => {
         return todo !== current
@@ -176,41 +141,9 @@ const TodoMVC = () => {
   };
   const isCheckedItem = (item) => {
     const result = checkedList.includes(item.id);
-    // console.log("result", result);
+
     return result ? "checked-item" : "not-checked-item";
   };
-  // checkedList.includes(item.id) ? "checked-item" : "not-checked-item";
-  // value = isChecked;
-  // console.log(`value: ${value}, ischeck: ${isChecked}`);
-  // const data = { id: current.id, name: current.name, isChecked: isChecked };
-  // setvalueItemName(current.name);
-  // setValueIsCheck(value);
-  // if (isChecked === true) {
-  //   editItem(current.id);
-  // } else {
-  //   // setvalueItemName(current.name);
-  //   // setValueIsCheck(value);
-  //   editItem(current.id);
-  // }
-  // setvalueItemName(current.name);
-  // setValueIsCheck(false);
-  // editItem(current.id);
-
-  // editItem(value);
-  // setTodos(
-  //   todos.map((todo) => {
-  //     return todo !== current
-  //       ? todo
-  //       : { id: todo.id, name: todo.name, isChecked: isChecked };
-  //   })
-  // );
-
-  // const getCheckedList = () => {
-  //   let stateList = setCheckedList(
-  //     todos.filter((item) => (item.isChecked = true))
-  //   );
-  //   console.log(stateList);
-  // };
 
   const deleteAllChecked = async () => {
     const uncheckedList = await Promise.all(
@@ -222,34 +155,57 @@ const TodoMVC = () => {
           return true; // item nao dc return true thi se giu lai trong array
         }
       })
-      );
-      setTodos(uncheckedList);
+    );
+    setTodos(uncheckedList);
   };
 
+  const onChangeData = (text) => {
+    setValueName(text.target.value);
+  };
+
+  const handleDoubleClick = (item) => {
+    console.log(`testing`);
+    setvalueItemName(item.name);
+    setIsEdit(item.id);
+    setValueIsCheck(item.isChecked);
+  };
+
+  const handleSetValueItemName = (e) => {
+    setvalueItemName(e.target.value);
+  };
+
+  const handleEnterKey = (e) => {
+    if (e.key === "Enter") {
+      editItem(isEdit);
+    }
+  };
   return (
     <div>
-      <h1>Todos</h1>
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicTask">
-          <Form.Label>Nhập task</Form.Label>
-          <Form.Control
-            onChange={(text) => {
-              setValueName(text.target.value);
-            }}
-            value={valueName}
-            type="text"
-            placeholder="Nhập task"
-          />
-        </Form.Group>
-        <Button onClick={addToDo} variant="primary">
-          Add
-        </Button>
-        <Button onClick={deleteAllChecked} variant="primary">
-          Delete All Checked
-        </Button>
-      </Form>
-
-      <ul>
+      <Header />
+      <AddForm
+        deleteAllChecked={deleteAllChecked}
+        addToDo={addToDo}
+        valueName={valueName}
+        onChangeData={onChangeData}
+      />
+      <TodoList
+        isLoad={isLoad}
+        todos={todos}
+        valueItemName={valueItemName}
+        valueIsCheck={valueIsCheck}
+        handleCheck={handleCheck}
+        isEdit={isEdit}
+        setvalueItemName={setvalueItemName}
+        editItem={editItem}
+        deleteItem={deleteItem}
+        setIsEdit={setIsEdit}
+        setValueIsCheck={setValueIsCheck}
+        isCheckedItem={isCheckedItem}
+        handleDoubleClick={handleDoubleClick}
+        handleSetValueItemName={handleSetValueItemName}
+        handleEnterKey={handleEnterKey}
+      />
+      {/* <ul>
         {isLoad && <p>is Loading </p>}
         {todos
           ? todos.map((item, index) => {
@@ -271,9 +227,6 @@ const TodoMVC = () => {
                           name={valueItemName}
                           checked={item.isChecked}
                           id={item.id}
-                          className={checked === true ? "checked-item" : null}
-                          // checked={checkedList[item] || false}
-                          // defaultChecked={item.isChecked}
                           onChange={(e) => handleCheck(e, item)}
                         />
                         <label>{index}</label>
@@ -310,11 +263,10 @@ const TodoMVC = () => {
               );
             })
           : null}
-      </ul>
-      {checkedList
-        ? `con ${todos.length - checkedList.length} item can hoan thanh`
-        : null}
-      {error && <p>{error} </p>}
+      </ul> */}
+      <Footer checkedList={checkedList} todos={todos} />
+      <Error error={error} />
+      {/* {error && <p>{error} </p>} */}
     </div>
   );
 };
