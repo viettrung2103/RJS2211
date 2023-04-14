@@ -174,11 +174,11 @@ const TodoMVC = () => {
     setvalueItemName(e.target.value);
   };
 
-  const handleEnterKey = (e) => {
-    if (e.key === "Enter") {
-      editItem(isEdit);
-    }
-  };
+  // const handleEnterKey = (e) => {
+  //   if (e.key === "Enter") {
+  //     editItem(isEdit);
+  //   }
+  // };
   return (
     <div>
       <Header />
@@ -202,8 +202,8 @@ const TodoMVC = () => {
         setValueIsCheck={setValueIsCheck}
         isCheckedItem={isCheckedItem}
         handleDoubleClick={handleDoubleClick}
-        handleSetValueItemName={handleSetValueItemName}
-        handleEnterKey={handleEnterKey}
+        // handleSetValueItemName={handleSetValueItemName}
+        // handleEnterKey={handleEnterKey}
       />
       {/* <ul>
         {isLoad && <p>is Loading </p>}

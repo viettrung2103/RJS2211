@@ -1,23 +1,60 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
+import axios from "axios";
 
 const TodoList = ({
   handleCheck,
   isEdit,
+  setIsLoad,
 
-  editItem,
+  // editItem,
   deleteItem,
   setIsEdit,
   todos,
   isLoad,
   isCheckedItem,
-  handleDoubleClick,
-  handleSetValueItemName,
-  handleEnterKey,
+  // handleDoubleClick,
+  // handleSetValueItemName,
+  // handleEnterKey
 }) => {
   const [valueItemName, setvalueItemName] = useState("");
   const [valueIsCheck, setValueIsCheck] = useState(false);
   const [valueName, setValueName] = useState(``);
+  // const [isEdit, setIsEdit] = useState(null);
+
+  const handleEnterKey = (e, name) => {
+    if (e.key === "Enter") {
+      console.log("item here", name);
+      setvalueItemName(name);
+      editItem(isEdit);
+    }
+  };
+
+  const editItem = async (id) => {
+    setIsLoad(true);
+    console.log(`id:${id} name: ${valueItemName}, ischeck:${valueIsCheck}`);
+    try {
+      await axios.put(`${URL}/${id}`, {
+        name: valueItemName,
+      });
+      // resetData();
+      // setIsLoad(false);
+    } catch (error) {
+      // setIsLoad(false);
+      // setError(`Co loi xay ra`);
+    }
+  };
+
+  const handleDoubleClick = (item) => {
+    setvalueItemName(item.name);
+    setIsEdit(item.id);
+    setValueIsCheck(item.isChecked);
+  };
+
+  const handleSetValueItemName = (e) => {
+    // console.log("set name", e);
+    setvalueItemName(e.target.value);
+  };
 
   return (
     <div>
@@ -26,7 +63,7 @@ const TodoList = ({
         {todos
           ? todos.map((item, index) => {
               return (
-                <li onDoubleClick={handleDoubleClick} key={index}>
+                <li onDoubleClick={() => handleDoubleClick(item)} key={index}>
                   <div>
                     <p>
                       {" "}
@@ -44,7 +81,7 @@ const TodoList = ({
                         <input
                           value={valueItemName}
                           onChange={handleSetValueItemName}
-                          onKeyDown={handleEnterKey}
+                          onKeyDown={(e) => handleEnterKey(e, valueItemName)}
                           type="text"
                         />
                       ) : (

@@ -6,7 +6,6 @@ export default function ReduxApp() {
   return (
     <div>
       <Level1 />
-      {console.log(userSlice)}
     </div>
   );
 }
