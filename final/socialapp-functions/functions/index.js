@@ -46,6 +46,7 @@ const firebaseConfig = {
 // firebase/app not firebase
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
+const db = admin.firestore();
 
 // const db = firebaseApp.firestore;
 // const storage = firebase.storage;
@@ -60,9 +61,7 @@ const auth = getAuth(firebaseApp);
 
 //get method
 app.get("/screams", (req, res) => {
-  admin
-    .firestore()
-    .collection("screams")
+  db.collection("screams")
     .orderBy("createdAt", "desc")
     .get()
     .then((data) => {
@@ -71,7 +70,7 @@ app.get("/screams", (req, res) => {
         screams.push({
           screamId: doc.id,
           body: doc.data().body,
-          userHandle: doc.data().userHandle,
+          handle: doc.data().handle,
           createdAt: doc.data().createdAt,
         });
       });
@@ -84,12 +83,10 @@ app.get("/screams", (req, res) => {
 app.post("/scream", (req, res) => {
   const newScream = {
     body: req.body.body,
-    userHandle: req.body.userHandle,
+    handle: req.body.handle,
     createdAt: new Date().toISOString(),
   };
-  admin
-    .firestore()
-    .collection("screams")
+  db.collection("screams")
     .add(newScream)
     .then((doc) => {
       res.json({
@@ -110,34 +107,62 @@ app.post("/signup", (req, res) => {
     email: req.body.email,
     password: req.body.password,
     confirmPassword: req.body.confirmPassword,
-    userHandle: req.body.userHandle,
+    handle: req.body.handle,
   };
   //TODO: validate data
-  createUserWithEmailAndPassword(auth, newUser.email, newUser.password)
+  // to initialize token
+  let token, userId;
+  db.doc(`/users/${newUser.handle}`)
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        return res.status(400).json({ handle: "this handle is already taken" });
+      } else {
+        return createUserWithEmailAndPassword(
+          auth,
+          newUser.email,
+          newUser.password
+        );
+      }
+    })
     .then((data) => {
-      return res
-        .status(201)
-        .json({ message: `user ${data.user.uid} signed up successfully` });
+      userId = data.user.uid;
+      return data.user.getIdToken();
+    })
+    .then((idToken) => {
+      token = idToken;
+      const userCredentials = {
+        hanldle: newUser.handle,
+        email: newUser.email,
+        createdAt: new Date().toISOString(),
+        userId,
+      };
+      // to persist data into database
+      return db.doc(`/users/${newUser.handle}`).set(userCredentials);
+      // return res.status(201).json({ token });
+    })
+    .then(() => {
+      return res.status(201).json({ token });
     })
     .catch((err) => {
-      console.log(err);
-      return res.status(500).json({ error: err.code, message: err.message });
+      console.error(err);
+      if (err.code === "auth/email-already-in-use") {
+        return res.status(400).json({ email: "email is already in use." });
+      } else {
+        return res.status(500).json({ error: err.code, message: err.message });
+      }
     });
 
-  // .then((data) => {
-  //   //register success
-  //   return res
-  //     .status(201)
-  //     .json({
-  //       message: `user ${data.user.uid} sign up successfully}`,
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       return res
-  //         .status(500)
-  //         .json({ error: err.code, message: err.message });
-  //     });
-  // });
+  // createUserWithEmailAndPassword(auth, newUser.email, newUser.password)
+  //   .then((data) => {
+  //     return res
+  //       .status(201)
+  //       .json({ message: `user ${data.user.uid} signed up successfully` });
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //     return res.status(500).json({ error: err.code, message: err.message });
+  //   });
 });
 
 exports.api = functions.region("europe-west1").https.onRequest(app);
