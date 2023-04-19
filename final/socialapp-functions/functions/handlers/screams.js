@@ -1,6 +1,6 @@
 const { db } = require("../util/admin");
 
-exports.getAllScreams = (req, res) => {
+const getAllScreams = (req, res) => {
   db.collection("screams")
     .orderBy("createdAt", "desc")
     .get()
@@ -19,7 +19,7 @@ exports.getAllScreams = (req, res) => {
     .catch((err) => console.log(err));
 };
 
-exports.createOneScream = (req, res) => {
+const createOneScream = (req, res) => {
   const newScream = {
     body: req.body.body,
     userHandle: req.user.handle,
@@ -37,3 +37,5 @@ exports.createOneScream = (req, res) => {
       console.log(err);
     });
 };
+
+module.exports = { getAllScreams, createOneScream };
