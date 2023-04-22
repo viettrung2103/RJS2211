@@ -9,6 +9,8 @@ export const LOGIN = "/login";
 export const REGISTER = "/register";
 export const PROTECTED = "/protected";
 export const DASHBOARD = "/protected/dashboard";
+export const USERS = "/protected/users";
+export const PROFILE = "/protected/profile/:id";
 
 export const router = createBrowserRouter([
   { path: ROOT, element: "Public Root" },
@@ -18,6 +20,10 @@ export const router = createBrowserRouter([
   {
     path: PROTECTED,
     element: <Layout />,
-    children: [{ path: DASHBOARD, element: "Dashboard" }],
+    children: [
+      { path: DASHBOARD, element: "Dashboard" },
+      { path: USERS, element: "Users" },
+      { path: PROFILE, element: `User from id:$` },
+    ],
   },
 ]);

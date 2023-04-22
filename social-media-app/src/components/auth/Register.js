@@ -26,7 +26,6 @@ export default function Register() {
   const {
     register,
     handleSubmit,
-
     formState: { errors },
   } = useForm();
 
@@ -86,7 +85,7 @@ export default function Register() {
             colorScheme="teal"
             size="md"
             w="full"
-            isLoading={false}
+            isLoading={isLoading}
             loadingText="Signing Up"
           >
             Register
@@ -103,7 +102,7 @@ export default function Register() {
             _hover={{ background: "teal.100" }}
           >
             {" "}
-            Register
+            Log in
           </Link>{" "}
           instead!
         </Text>

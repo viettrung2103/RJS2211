@@ -32,7 +32,7 @@ export const useAuth = () => {
     }
   }, [authLoading]);
 
-  return { user: authUser, isLoading: isLoading, error: error };
+  return { user, isLoading: isLoading, error: error };
 };
 
 export const useLogin = () => {

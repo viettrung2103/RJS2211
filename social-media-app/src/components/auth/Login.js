@@ -27,7 +27,6 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
-
   const handleLogin = async (data) => {
     const succeeded = await login({
       email: data.email,
@@ -45,7 +44,7 @@ export default function Login() {
           Login
         </Heading>
         <form onSubmit={handleSubmit(handleLogin)}>
-          <FormControl isInvalid={true} py="2">
+          <FormControl isInvalid={errors.message} py="2">
             <FormLabel>Email</FormLabel>
             <Input
               type="email"
@@ -56,7 +55,7 @@ export default function Login() {
               {errors.email && errors.email.message}
             </FormErrorMessage>
           </FormControl>
-          <FormControl isInvalid={true} py="2">
+          <FormControl isInvalid={errors.password} py="2">
             <FormLabel>Password</FormLabel>
             <Input
               type="password"
@@ -73,7 +72,7 @@ export default function Login() {
             colorScheme="teal"
             size="md"
             w="full"
-            isLoading={false}
+            isLoading={isLoading}
             loadingText="Logging in"
           >
             Log In
