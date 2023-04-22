@@ -4,15 +4,33 @@ import {
 } from "firebase/auth";
 import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 import { auth, db } from "lib/firebase";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DASHBOARD, LOGIN } from "lib/routers";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, getDoc } from "firebase/firestore";
 import isUsernameExists from "utils/isUsernameExists";
 
 export const useAuth = () => {
-  const [authUser, isLoading, error] = useAuthState(auth);
+  const [authUser, authLoading, error] = useAuthState(auth);
+  const [isLoading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      const ref = doc(db, "users", authUser.uid); // doc() is to read from db
+      const docSnap = await getDoc(ref);
+      setUser(docSnap.data());
+      setLoading(false); // getDoc() to fetch the data
+    };
+    // after fetching the data, meaning authload is false, will process data
+    if (!authLoading) {
+      if (authUser) {
+        fetchData(); // call this function when there is user
+      } else setLoading(false); //not signed in
+    }
+  }, [authLoading]);
 
   return { user: authUser, isLoading: isLoading, error: error };
 };
