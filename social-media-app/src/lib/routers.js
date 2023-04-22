@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
     path: PROTECTED,
     element: <Layout />,
     children: [
-      { path: DASHBOARD, element: "Dashboard" },
+      { path: DASHBOARD, element: <Dashboard /> },
       { path: USERS, element: "Users" },
       { path: PROFILE, element: `User from id:$` },
     ],
