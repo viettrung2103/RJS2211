@@ -27,7 +27,6 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
-  console.log(errors);
 
   const handleLogin = async (data) => {
     const succeeded = await login({
@@ -35,7 +34,6 @@ export default function Login() {
       password: data.password,
       redirectTo: DASHBOARD,
     });
-    console.log(data);
     if (succeeded) reset();
   };
 

@@ -2,14 +2,13 @@ import { LOGIN } from "lib/routers";
 import React, { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "hooks/auth";
+import Navbar from "components/navbar";
 
 export default function Layout() {
   // to check if the pathname start with specific name
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { user, isLoading } = useAuth();
-
-  console.log(pathname);
 
   useEffect(() => {
     if (pathname.startsWith("/protected" && !user)) {
@@ -20,7 +19,8 @@ export default function Layout() {
   if (isLoading) return "Loading";
   return (
     <>
-      This is the child: <Outlet />
+      <Navbar />
+      <Outlet />
     </>
   );
 }
