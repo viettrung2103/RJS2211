@@ -1,23 +1,20 @@
 const functions = require("firebase-functions");
-// const admin = require("firebase-admin");
+const admin = require("firebase-admin");
 const app = require("express")();
 const firebase = require("firebase/compat/app");
-const { admin, db } = require("./util/admin");
 const {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } = require("firebase/auth");
+const { firebaseConfig } = require("./util/config");
 
 const { validateLoginData, validateSignupData } = require("./util/validators");
-
-const { firebaseConfig } = require("./util/config");
-const { getAllScreams, createOneScream } = require("./handlers/screams");
 // const { FBauth } = require("./util/FBauth");
 // const { login } = require("./handlers/users");
 // const {} = require("firebase-admin/auth");
 
-// admin.initializeApp();
+admin.initializeApp();
 
 // Import the functions you need from the SDKs you need
 // import { initializeApp } from "firebase/app";
@@ -44,7 +41,7 @@ const { getAllScreams, createOneScream } = require("./handlers/screams");
 // firebase/app not firebase
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
-// const db = admin.firestore();
+const db = admin.firestore();
 
 // const db = firebaseApp.firestore;
 // const storage = firebase.storage;
@@ -58,27 +55,26 @@ const auth = getAuth(firebaseApp);
 // firebaseApp.initializeApp(firebaseConfig);
 
 //get method
-app.get("/screams", getAllScreams);
-// app.get("/screams", (req, res) => {
-//   db.collection("screams")
-//     .orderBy("createdAt", "desc")
-//     .get()
-//     .then((data) => {
-//       let screams = [];
-//       data.forEach((doc) => {
-//         screams.push({
-//           screamId: doc.id,
-//           body: doc.data().body,
-//           handle: doc.data().handle,
-//           createdAt: doc.data().createdAt,
-//           commentCount: doc.data().commentCount,
-//           likeCount: doc.data().likeCount,
-//         });
-//       });
-//       return res.json(screams);
-//     })
-//     .catch((err) => console.log(err));
-// });
+app.get("/screams", (req, res) => {
+  db.collection("screams")
+    .orderBy("createdAt", "desc")
+    .get()
+    .then((data) => {
+      let screams = [];
+      data.forEach((doc) => {
+        screams.push({
+          screamId: doc.id,
+          body: doc.data().body,
+          handle: doc.data().handle,
+          createdAt: doc.data().createdAt,
+          commentCount: doc.data().commentCount,
+          likeCount: doc.data().likeCount,
+        });
+      });
+      return res.json(screams);
+    })
+    .catch((err) => console.log(err));
+});
 //FB auth
 const FBAuth = (req, res, next) => {
   let idToken;
@@ -97,7 +93,7 @@ const FBAuth = (req, res, next) => {
     .verifyIdToken(idToken) // to verify whether this token is from our own Firebase app or not, , it will return a user body, by query our db, db will return the requested user
     .then((decodedToken) => {
       req.user = decodedToken;
-      // console.log(decodedToken);
+      console.log(decodedToken);
       // console.log("req uid", req.user.uid);
       const data = db
         .collection("users")
@@ -108,12 +104,10 @@ const FBAuth = (req, res, next) => {
     })
     // after getting the data, use .then to process the data
     .then((data) => {
-      // console.log("data", data.doc[0].doc());
       // console.log(data.docs[0].data().handle);
       // data is a string with only 1 item
 
       req.user.handle = data.docs[0].data().handle;
-      console.log("data is ", data);
       // console.log(data.doc[0]); // data() to extract data from docs
       return next();
     })
@@ -124,7 +118,6 @@ const FBAuth = (req, res, next) => {
 };
 
 //post method
-app.post("scream", FBAuth, createOneScream);
 app.post("/scream", FBAuth, (req, res) => {
   if (req.body.body.trim() === "") {
     return res.status(400).json({ body: "Body must not be empty" });
@@ -132,10 +125,9 @@ app.post("/scream", FBAuth, (req, res) => {
 
   const newScream = {
     body: req.body.body,
-    userHandle: req.user.handle,
+    handle: req.body.handle,
     createdAt: new Date().toISOString(),
   };
-  // console.log(req.user);
   db.collection("screams")
     .add(newScream)
     .then((doc) => {
@@ -151,18 +143,18 @@ app.post("/scream", FBAuth, (req, res) => {
 
 // https://europe-west1-socialapp-final.cloudfunctions.net/api/
 
-// const isEmail = (email) => {
-//   const emailRegEx =
-//     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-//   if (email.match(emailRegEx)) return true; // valid email
-//   else return false;
-// };
+const isEmail = (email) => {
+  const emailRegEx =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (email.match(emailRegEx)) return true; // valid email
+  else return false;
+};
 
-// const isEmpty = (string) => {
-//   // in case user enter whitespace>> use strim
-//   if (string.trim() === "") return true;
-//   else return false;
-// };
+const isEmpty = (string) => {
+  // in case user enter whitespace>> use strim
+  if (string.trim() === "") return true;
+  else return false;
+};
 
 // Signup route
 app.post("/signup", (req, res) => {
@@ -244,13 +236,11 @@ app.post("/login", (req, res) => {
     email: req.body.email,
     password: req.body.password,
   };
-  const { valid, errors } = validateLoginData(user);
-  if (!valid) return res.status(400).json(errors);
 
-  // let errors = {};
-  // if (isEmpty(user.email)) errors.email = "Must not be empty";
-  // if (isEmpty(user.password)) errors.password = "Must not be empty";
-  // if (Object.keys(errors).length > 0) return res.status(400).json(errors);
+  let errors = {};
+  if (isEmpty(user.email)) errors.email = "Must not be empty";
+  if (isEmpty(user.password)) errors.password = "Must not be empty";
+  if (Object.keys(errors).length > 0) return res.status(400).json(errors);
 
   // const { valid, errors } = validateLoginData(user);
   // if (!valid) return res.status(400).json(errors);
