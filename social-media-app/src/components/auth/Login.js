@@ -9,7 +9,6 @@ import {
   Input,
   Link,
   Text,
-  useFormErrorStyles,
 } from "@chakra-ui/react";
 import { DASHBOARD, REGISTER } from "lib/routers";
 import React from "react";
