@@ -1,10 +1,11 @@
-import { Button, Flex, Text, Box } from "@chakra-ui/react";
+import { Flex, Text, Box } from "@chakra-ui/react";
 import PicProfile from "components/profile/PicProfile";
 import { useUser } from "hooks/users";
 import { formatDistanceToNow } from "date-fns";
 import UsernameButton from "../profile/UsernameButton";
 
-export default function Header({ uid, date }) {
+export default function Header({ post }) {
+  const { uid, date } = post;
   const { user, isLoading } = useUser(uid);
   if (isLoading) return "Loading...";
   return (

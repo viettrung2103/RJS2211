@@ -1,5 +1,14 @@
 import { uuidv4 } from "@firebase/util";
-import { collection, doc, orderBy, query, setDoc } from "firebase/firestore";
+import {
+  arrayRemove,
+  arrayUnion,
+  collection,
+  doc,
+  orderBy,
+  query,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "lib/firebase";
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
@@ -37,4 +46,22 @@ export function usePosts() {
   const [posts, isLoading, error] = useCollectionData(q); // aray
   if (error) throw error;
   return { posts, isLoading };
+}
+
+export function useToggleLike({ id, isLiked, uid }) {
+  const [isLoading, setLoading] = useState(false);
+  const toggleLike = async () => {
+    setLoading(true);
+    const docRef = doc(db, "posts", id);
+    // arrayRemove: remove item from array
+    //arrayUnion(): add item to array
+    await updateDoc(docRef, {
+      likes: isLiked ? arrayRemove(uid) : arrayUnion(uid),
+    });
+    // when a post is liked at first, press like >> remove id
+    // when a post is not liked at first, press like >> add id
+
+    setLoading(false);
+  };
+  return { toggleLike, isLoading };
 }
