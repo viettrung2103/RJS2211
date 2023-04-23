@@ -43,7 +43,7 @@ export default function Login() {
           Login
         </Heading>
         <form onSubmit={handleSubmit(handleLogin)}>
-          <FormControl isInvalid={errors.message} py="2">
+          <FormControl isInvalid={errors.email} py="2">
             <FormLabel>Email</FormLabel>
             <Input
               type="email"

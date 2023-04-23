@@ -46,7 +46,7 @@ export default function Register() {
           Register
         </Heading>
         <form onSubmit={handleSubmit(handleRegister)}>
-          <FormControl isInvalid={errors.message} py="2">
+          <FormControl isInvalid={errors.username} py="2">
             <FormLabel>Username</FormLabel>
             <Input
               type="username"
@@ -57,7 +57,7 @@ export default function Register() {
               {errors.username && errors.username.message}
             </FormErrorMessage>
           </FormControl>
-          <FormControl isInvalid={errors.message} py="2">
+          <FormControl isInvalid={errors.email} py="2">
             <FormLabel>Email</FormLabel>
             <Input
               type="email"
@@ -68,7 +68,7 @@ export default function Register() {
               {errors.email && errors.email.message}
             </FormErrorMessage>
           </FormControl>
-          <FormControl isInvalid={errors.message} py="2">
+          <FormControl isInvalid={errors.password} py="2">
             <FormLabel>Password</FormLabel>
             <Input
               type="password"
