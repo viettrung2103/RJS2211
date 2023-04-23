@@ -104,7 +104,7 @@ export const useRegister = () => {
           id: res.user.uid,
           username: username.toLowerCase(),
           avatar: "",
-          date: new Date().toISOString(),
+          date: Date.now(),
         });
 
         toast({

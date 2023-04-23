@@ -1,8 +1,9 @@
 import { uuidv4 } from "@firebase/util";
-import { doc, setDoc } from "firebase/firestore";
+import { collection, doc, orderBy, query, setDoc } from "firebase/firestore";
 import { db } from "lib/firebase";
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 export function useAddPost() {
   const [isLoading, setLoading] = useState(false);
@@ -11,11 +12,11 @@ export function useAddPost() {
   const addPost = async (post) => {
     setLoading(true);
     const id = uuidv4();
-    await setDoc(doc(db, "post", id), {
+    await setDoc(doc(db, "posts", id), {
       // to set id with our own id, , addDoc use auto generated id from firebase, bad practice
       ...post,
       id, // post's id
-      date: new Date().toISOString(),
+      date: Date.now(),
       likes: [], // array of users's uid that like this post
     });
     setLoading(false);
@@ -28,4 +29,12 @@ export function useAddPost() {
     });
   };
   return { addPost, isLoading };
+}
+
+export function usePosts() {
+  const q = query(collection(db, "posts"), orderBy("date", "desc"));
+  // console.log("querry", q);
+  const [posts, isLoading, error] = useCollectionData(q); // aray
+  if (error) throw error;
+  return { posts, isLoading };
 }
